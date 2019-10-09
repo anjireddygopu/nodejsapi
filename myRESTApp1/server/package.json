@@ -1,0 +1,32 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "formidable": "^1.2.1",
+    "fs-extra": "^7.0.0",
+    "https": "^1.0.0",
+    "jshint-esnext": "^2.7.0-3",
+    "jwt-simple": "^0.5.1",
+    "morgan": "^1.9.0",
+    "mysql": "^2.15.0",
+    "nexmo": "^2.3.2",
+    "nodemailer": "^4.6.7",
+    "otp-generator": "^1.1.0",
+    "ws": "^6.0.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

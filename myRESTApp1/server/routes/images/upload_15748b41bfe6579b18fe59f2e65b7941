@@ -1,0 +1,2001 @@
+-- MySQL dump 10.13  Distrib 5.5.60, for Win64 (AMD64)
+--
+-- Host: localhost    Database: health
+-- ------------------------------------------------------
+-- Server version	5.5.60
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `allergies`
+--
+
+DROP TABLE IF EXISTS `allergies`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `allergies` (
+  `allergy_id` int(11) NOT NULL AUTO_INCREMENT,
+  `allergy_name` varchar(40) DEFAULT NULL,
+  `created_by` varchar(30) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` varchar(30) DEFAULT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`allergy_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `allergies`
+--
+
+LOCK TABLES `allergies` WRITE;
+/*!40000 ALTER TABLE `allergies` DISABLE KEYS */;
+INSERT INTO `allergies` VALUES (1,'Skin Allergy','haritha','2018-08-10 15:02:59','haritha','2018-08-10 15:02:59',0),(2,'Dust Allergy','haritha','2018-08-06 23:46:23','haritha','2018-08-06 23:46:23',1),(3,'Food Allergy','haritha','2018-08-06 23:46:35','haritha','2018-08-06 23:46:35',1),(4,'Animal','haritha','2018-08-08 23:20:44','haritha','2018-08-08 23:20:44',0),(5,'latex','haritha','2018-08-02 19:18:54','haritha','2018-08-02 19:18:54',1),(6,'pollen','haritha','2018-08-09 17:09:47',NULL,'0000-00-00 00:00:00',1),(7,'skin allergy','haritha','2018-08-09 17:28:32','haritha','2018-08-09 17:28:32',0),(8,'Wheat','haritha','2018-08-09 17:29:05',NULL,'0000-00-00 00:00:00',1),(9,'SomeData','haritha','2018-08-16 15:56:07','haritha','2018-08-16 15:56:07',0),(10,'Pure','haritha','2018-08-10 15:06:21','haritha','2018-08-10 15:06:21',0),(11,'Some','haritha','2018-08-16 14:57:33','haritha','2018-08-16 14:57:33',0),(12,'food alergy','haritha','2018-08-10 15:48:04','haritha','2018-08-10 15:48:04',0),(13,'rashes','haritha','2018-08-13 15:48:06','haritha','2018-08-13 15:48:06',0),(14,'skin','haritha','2018-08-16 14:56:56',NULL,'0000-00-00 00:00:00',1);
+/*!40000 ALTER TABLE `allergies` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `allergys_txn`
+--
+
+DROP TABLE IF EXISTS `allergys_txn`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `allergys_txn` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `medical_record_no` varchar(50) DEFAULT NULL,
+  `additional_notes` varchar(5000) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `medical_record_no` (`medical_record_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `allergys_txn`
+--
+
+LOCK TABLES `allergys_txn` WRITE;
+/*!40000 ALTER TABLE `allergys_txn` DISABLE KEYS */;
+INSERT INTO `allergys_txn` VALUES (3,'PT20188616381477','edtfgr'),(4,'PT201881315443711','hgzxgxufyfdh');
+/*!40000 ALTER TABLE `allergys_txn` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `allergys_txn_dtls`
+--
+
+DROP TABLE IF EXISTS `allergys_txn_dtls`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `allergys_txn_dtls` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `allergys_txn_id` int(11) DEFAULT NULL,
+  `allergys_id` int(11) DEFAULT NULL,
+  `description` varchar(50) DEFAULT NULL,
+  `created_by` varchar(30) DEFAULT NULL,
+  `created_on` varchar(30) DEFAULT NULL,
+  `updated_by` varchar(30) DEFAULT NULL,
+  `updated_on` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `allergys_id` (`allergys_id`),
+  KEY `allergys_txn_id` (`allergys_txn_id`),
+  CONSTRAINT `allergys_txn_dtls_ibfk_1` FOREIGN KEY (`allergys_txn_id`) REFERENCES `allergys_txn` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `allergys_txn_dtls`
+--
+
+LOCK TABLES `allergys_txn_dtls` WRITE;
+/*!40000 ALTER TABLE `allergys_txn_dtls` DISABLE KEYS */;
+/*!40000 ALTER TABLE `allergys_txn_dtls` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bloodgroups`
+--
+
+DROP TABLE IF EXISTS `bloodgroups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bloodgroups` (
+  `bloodgroup_id` int(100) NOT NULL AUTO_INCREMENT,
+  `bloodgroup_name` varchar(100) DEFAULT NULL,
+  `created_by` varchar(100) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` varchar(100) DEFAULT NULL,
+  `updated_on` varchar(100) DEFAULT NULL,
+  `active` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`bloodgroup_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bloodgroups`
+--
+
+LOCK TABLES `bloodgroups` WRITE;
+/*!40000 ALTER TABLE `bloodgroups` DISABLE KEYS */;
+INSERT INTO `bloodgroups` VALUES (1,'A +ve',NULL,'2018-08-09 17:09:56',NULL,'2018-08-09 12:12:02','0'),(2,'A-ve',NULL,'2018-07-04 10:56:32',NULL,NULL,'0'),(3,'B+ve','raju','2018-08-01 17:08:00',NULL,'2018-08-01 13:06:22','1'),(4,'O+Ve','raju','2018-08-01 17:09:52',NULL,'2018-08-01 13:09:26','0'),(5,'AB+ve','raju','2018-08-02 19:21:24',NULL,NULL,'1'),(6,'O -ve','raju','2018-08-10 15:06:57',NULL,'2018-08-10 11:06:39','1'),(7,'AB+Ve','raju','2018-08-10 15:07:17',NULL,NULL,'1'),(8,'0 -ve','raju','2018-08-10 15:48:40',NULL,'2018-08-10 10:47:13','0'),(9,'0+','raju','2018-08-13 15:49:30',NULL,'2018-08-13 10:50:49','0');
+/*!40000 ALTER TABLE `bloodgroups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `chiefcomplaint`
+--
+
+DROP TABLE IF EXISTS `chiefcomplaint`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `chiefcomplaint` (
+  `id` int(100) NOT NULL AUTO_INCREMENT,
+  `medical_record_no` varchar(100) DEFAULT NULL,
+  `episode_id` varchar(100) DEFAULT NULL,
+  `visit_id` varchar(100) DEFAULT NULL,
+  `chief_complaint` varchar(2000) DEFAULT NULL,
+  `created_by` varchar(100) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` varchar(100) DEFAULT NULL,
+  `updated_on` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `chiefcomplaint`
+--
+
+LOCK TABLES `chiefcomplaint` WRITE;
+/*!40000 ALTER TABLE `chiefcomplaint` DISABLE KEYS */;
+INSERT INTO `chiefcomplaint` VALUES (1,'PT20188616381477','13','1','restydfy12345','raju','2018-08-09 17:54:50','Raju','2018-08-09 12:53:34'),(2,'PT20188616381477','25','1','restydfy12345','raju','2018-08-09 17:54:50','Raju','2018-08-09 12:53:34'),(3,'PT20188616381477','149','1','restydfy12345','raju','2018-08-09 17:54:50','Raju','2018-08-09 12:53:34'),(4,'PT20188616381477','151','1','restydfy12345','raju','2018-08-09 17:54:50','Raju','2018-08-09 12:53:34'),(5,'PT20188616381477','1','1','restydfy12345','raju','2018-08-09 17:54:50','Raju','2018-08-09 12:53:34'),(6,'PT20188616381477','4','1','some','raju','2018-08-10 00:40:49',NULL,NULL),(7,'PT20188616381477','37','1','my name is khan ','raju','2018-08-10 20:02:58',NULL,NULL);
+/*!40000 ALTER TABLE `chiefcomplaint` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `countries`
+--
+
+DROP TABLE IF EXISTS `countries`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `countries` (
+  `country_id` int(30) NOT NULL AUTO_INCREMENT,
+  `country_name` varchar(30) DEFAULT NULL,
+  `created_by` varchar(30) DEFAULT NULL,
+  `created_on` varchar(30) DEFAULT NULL,
+  `updated_by` varchar(30) DEFAULT NULL,
+  `updated_on` varchar(30) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`country_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `countries`
+--
+
+LOCK TABLES `countries` WRITE;
+/*!40000 ALTER TABLE `countries` DISABLE KEYS */;
+INSERT INTO `countries` VALUES (1,'India',NULL,NULL,'siva','68201819',1),(2,'Bhutan',NULL,NULL,'siva','108201811',0),(3,'China',NULL,NULL,NULL,NULL,1),(4,'China','anji','317201810','siva','18201813',0),(5,'Armenia','anji','28201814',NULL,NULL,1),(6,'Burma','anji','98201812','siva','98201812',0),(7,'Albania','anji','108201811',NULL,NULL,1),(8,'England','anji','108201810','siva','108201810',0),(9,'india.','anji','138201810','siva','138201810',0);
+/*!40000 ALTER TABLE `countries` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `diet`
+--
+
+DROP TABLE IF EXISTS `diet`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `diet` (
+  `diet_id` int(11) NOT NULL AUTO_INCREMENT,
+  `diet_name` varchar(40) DEFAULT NULL,
+  `created_on` varchar(30) DEFAULT NULL,
+  `created_by` varchar(30) DEFAULT NULL,
+  `updated_on` varchar(20) DEFAULT NULL,
+  `updated_by` varchar(30) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`diet_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `diet`
+--
+
+LOCK TABLES `diet` WRITE;
+/*!40000 ALTER TABLE `diet` DISABLE KEYS */;
+INSERT INTO `diet` VALUES (34,'Liquids frf','30062018','mahesh','06/08/2018','mahesh',1),(35,'idly ','02072018','mahesh',NULL,NULL,0),(36,'Chapathi','26/07/2018','mahesh','26/07/2018','mahesh',0),(37,'Fruits.1','09/08/2018','mahesh','09/08/2018','mahesh',1),(38,'Fruits','10/08/2018','mahesh','10/08/2018','mahesh',0),(39,'milk','13/08/2018','mahesh','13/08/2018','mahesh',1),(40,'milk','13/08/2018','mahesh',NULL,NULL,0);
+/*!40000 ALTER TABLE `diet` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `diet_details_txn`
+--
+
+DROP TABLE IF EXISTS `diet_details_txn`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `diet_details_txn` (
+  `txn_id` int(11) NOT NULL AUTO_INCREMENT,
+  `medical_record_no` varchar(100) NOT NULL DEFAULT '',
+  `episode` varchar(100) NOT NULL DEFAULT '',
+  `visit` varchar(100) NOT NULL DEFAULT '',
+  `additional_notes` varchar(2000) DEFAULT NULL,
+  PRIMARY KEY (`txn_id`,`medical_record_no`,`episode`,`visit`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `diet_details_txn`
+--
+
+LOCK TABLES `diet_details_txn` WRITE;
+/*!40000 ALTER TABLE `diet_details_txn` DISABLE KEYS */;
+INSERT INTO `diet_details_txn` VALUES (7,'PT20188616381477','150','1',''),(8,'PT20188616381477','4','1','ffdbf'),(9,'PT20188616381477','15','1','dggggggg'),(10,'PT20188616381477','16','1','cdsfcdsc'),(11,'PT20188616381477','25','1','');
+/*!40000 ALTER TABLE `diet_details_txn` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `diet_details_txn_dtls`
+--
+
+DROP TABLE IF EXISTS `diet_details_txn_dtls`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `diet_details_txn_dtls` (
+  `dtls_id` int(11) NOT NULL AUTO_INCREMENT,
+  `txn_id` int(11) DEFAULT NULL,
+  `diet_id` varchar(100) DEFAULT NULL,
+  `diet_name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`dtls_id`),
+  KEY `fk_key` (`txn_id`),
+  CONSTRAINT `diet_details_txn_dtls_ibfk_1` FOREIGN KEY (`txn_id`) REFERENCES `diet_details_txn` (`txn_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `diet_details_txn_dtls`
+--
+
+LOCK TABLES `diet_details_txn_dtls` WRITE;
+/*!40000 ALTER TABLE `diet_details_txn_dtls` DISABLE KEYS */;
+INSERT INTO `diet_details_txn_dtls` VALUES (7,7,'undefined','undefined'),(8,8,'36','Chapathi'),(9,8,'35','idly '),(10,9,'36','Chapathi'),(11,9,'37','Fruits.1'),(12,10,'36','Chapathi'),(13,11,'undefined','undefined');
+/*!40000 ALTER TABLE `diet_details_txn_dtls` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `diseasechild`
+--
+
+DROP TABLE IF EXISTS `diseasechild`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `diseasechild` (
+  `id` int(100) DEFAULT NULL,
+  `disease_id` int(100) DEFAULT NULL,
+  `disease_name` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `diseasechild`
+--
+
+LOCK TABLES `diseasechild` WRITE;
+/*!40000 ALTER TABLE `diseasechild` DISABLE KEYS */;
+INSERT INTO `diseasechild` VALUES (46,1,'Cancer'),(46,2,'Asthma'),(47,1,'Cancer'),(47,2,'Asthma');
+/*!40000 ALTER TABLE `diseasechild` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `diseases`
+--
+
+DROP TABLE IF EXISTS `diseases`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `diseases` (
+  `diseases_id` int(11) NOT NULL AUTO_INCREMENT,
+  `diseases_name` varchar(40) DEFAULT NULL,
+  `icd_code` varchar(50) DEFAULT NULL,
+  `created_by` varchar(30) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` varchar(30) DEFAULT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `active` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`diseases_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `diseases`
+--
+
+LOCK TABLES `diseases` WRITE;
+/*!40000 ALTER TABLE `diseases` DISABLE KEYS */;
+INSERT INTO `diseases` VALUES (1,'Cancer','658655',NULL,'2018-08-10 15:34:12','Pawan','0000-00-00 00:00:00',1),(2,'Asthma','285896800',NULL,'2018-08-01 17:15:49','Pawan','0000-00-00 00:00:00',1),(3,'Ringworm',NULL,NULL,'2018-07-24 23:49:23',NULL,'0000-00-00 00:00:00',0),(4,'LatexAllergaeeies','522255454',NULL,'2018-07-27 15:28:08','Pawan','0000-00-00 00:00:00',1),(5,'PedestrianInjury','102345',NULL,'2018-08-01 21:50:15','Pawan','0000-00-00 00:00:00',1),(6,'TB Testing & Diagnosis',NULL,NULL,'2018-07-24 23:49:52',NULL,'0000-00-00 00:00:00',0),(7,'Adenovirus Vaccination',NULL,NULL,'2018-07-24 23:50:03',NULL,'0000-00-00 00:00:00',0),(8,'Acquired Immune Deficiency Syndrome',NULL,NULL,'2018-07-24 23:50:13',NULL,'0000-00-00 00:00:00',0),(9,'Clostridium Perfringens',NULL,NULL,'2018-07-24 23:50:24',NULL,'0000-00-00 00:00:00',0),(10,'Fever..','4565454',NULL,'2018-08-10 15:50:17','Pawan','0000-00-00 00:00:00',1),(11,'Blood Cancer','6635635',NULL,'2018-08-10 15:30:17',NULL,'0000-00-00 00:00:00',1),(12,'Blood Cancer','6635635',NULL,'2018-08-10 15:34:27',NULL,'0000-00-00 00:00:00',1),(13,'Fever','456546',NULL,'2018-08-10 15:50:03',NULL,'0000-00-00 00:00:00',1),(14,'fever','123',NULL,'2018-08-13 15:52:37','Pawan','0000-00-00 00:00:00',1);
+/*!40000 ALTER TABLE `diseases` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `district`
+--
+
+DROP TABLE IF EXISTS `district`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `district` (
+  `district_id` int(30) NOT NULL,
+  `state_name` varchar(25) DEFAULT NULL,
+  `state_id` int(30) DEFAULT NULL,
+  PRIMARY KEY (`district_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `district`
+--
+
+LOCK TABLES `district` WRITE;
+/*!40000 ALTER TABLE `district` DISABLE KEYS */;
+/*!40000 ALTER TABLE `district` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `districts`
+--
+
+DROP TABLE IF EXISTS `districts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `districts` (
+  `district_id` int(30) NOT NULL AUTO_INCREMENT,
+  `district_name` varchar(25) DEFAULT NULL,
+  `state_id` int(30) DEFAULT NULL,
+  `country_id` int(30) DEFAULT NULL,
+  `created_by` varchar(30) DEFAULT NULL,
+  `created_on` varchar(30) DEFAULT NULL,
+  `updated_by` varchar(30) DEFAULT NULL,
+  `updated_on` varchar(30) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`district_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `districts`
+--
+
+LOCK TABLES `districts` WRITE;
+/*!40000 ALTER TABLE `districts` DISABLE KEYS */;
+INSERT INTO `districts` VALUES (1,'Guntur',1,1,NULL,NULL,'siva','18201813',1),(2,'East Godavari',1,1,NULL,NULL,NULL,NULL,1),(3,'Krishna',1,1,NULL,NULL,NULL,NULL,1),(4,'Khammam',2,1,NULL,NULL,'siva','68201820',1),(5,'Adilabad',2,1,NULL,NULL,NULL,NULL,1),(6,'Dhaka',6,2,NULL,NULL,NULL,NULL,1),(7,'Darbhanga',6,2,NULL,NULL,NULL,NULL,1),(8,'West Godavari',1,1,'anji','317201810','siva','108201811',1),(9,'Karimnagar',2,1,'anji','98201812','siva','98201812',0),(10,'Anantapur',1,1,'anji','108201811',NULL,NULL,1),(11,'Warangal',2,1,'anji','108201810','siva','108201810',0),(12,'karimnagar',2,1,'anji','138201810','siva','138201810',0);
+/*!40000 ALTER TABLE `districts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `doctor_details`
+--
+
+DROP TABLE IF EXISTS `doctor_details`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `doctor_details` (
+  `doctor_id` varchar(50) NOT NULL,
+  `doctor_name` varchar(255) DEFAULT NULL,
+  `title` varchar(20) DEFAULT NULL,
+  `qualification` varchar(255) DEFAULT NULL,
+  `specialisatiion` varchar(255) DEFAULT NULL,
+  `register_no` varchar(50) DEFAULT NULL,
+  `address_line_1` varchar(255) DEFAULT NULL,
+  `address_line_2` varchar(255) DEFAULT NULL,
+  `office_contact_no` varchar(50) DEFAULT NULL,
+  `personal_contact_no` varchar(50) DEFAULT NULL,
+  `email_id` varchar(255) DEFAULT NULL,
+  `country` varchar(50) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `residence_address_line_1` varchar(255) DEFAULT NULL,
+  `residence_address_line_2` varchar(255) DEFAULT NULL,
+  `residence_contact_no` varchar(50) DEFAULT NULL,
+  `res_country` varchar(50) DEFAULT NULL,
+  `res_state` varchar(50) DEFAULT NULL,
+  `res_city` varchar(50) DEFAULT NULL,
+  `zip` varchar(20) DEFAULT NULL,
+  `craeted_by` varchar(50) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_by` varchar(50) DEFAULT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `district` varchar(50) DEFAULT NULL,
+  `zipcode` varchar(50) DEFAULT NULL,
+  `res_district` varchar(50) DEFAULT NULL,
+  `expert_center_name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`doctor_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `doctor_details`
+--
+
+LOCK TABLES `doctor_details` WRITE;
+/*!40000 ALTER TABLE `doctor_details` DISABLE KEYS */;
+INSERT INTO `doctor_details` VALUES ('2002','Prasad','6','BDS','3','336545','1-89','Jublee hills','04025896314','9523147035','prasad@gmail.com','1','1','2','1/56','Martha hali','08025631789','1','2','5','1233','Ramya','2018-08-13 21:05:21',NULL,'0000-00-00 00:00:00','1','522403','4','3001'),('3001','Suresh','6','MBBS','1','898532146','1-23','Banjarahills','04023654789','8983652140','suresh@gmail.com','1','1','2','1/23','Hitech city','04056987412','1','1','3','533001','Ramya','2018-08-07 17:41:09','Ramya','2018-08-13 17:30:25','1',NULL,'2','3001');
+/*!40000 ALTER TABLE `doctor_details` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `dosage_master`
+--
+
+DROP TABLE IF EXISTS `dosage_master`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `dosage_master` (
+  `dosage_id` int(25) NOT NULL AUTO_INCREMENT,
+  `dosage_description` varchar(50) DEFAULT NULL,
+  `created_by` varchar(25) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` varchar(25) DEFAULT NULL,
+  `updated_on` varchar(25) DEFAULT NULL,
+  `active` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`dosage_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `dosage_master`
+--
+
+LOCK TABLES `dosage_master` WRITE;
+/*!40000 ALTER TABLE `dosage_master` DISABLE KEYS */;
+INSERT INTO `dosage_master` VALUES (1,'Morning',NULL,'2018-07-31 22:27:49',NULL,NULL,1),(2,'Afternoon',NULL,'2018-07-21 19:56:56',NULL,NULL,1),(3,'Night',NULL,'2018-08-01 17:22:46',NULL,NULL,0),(4,'Before_Bed',NULL,'2018-07-21 19:59:19',NULL,NULL,0),(5,'after-dinner',NULL,'2018-08-09 16:58:55',NULL,NULL,1),(6,'linguistic',NULL,'2018-08-09 17:21:21',NULL,NULL,1),(7,'on-empty-stomach',NULL,'2018-08-09 16:59:26',NULL,NULL,0),(8,'insulin',NULL,'2018-08-13 15:49:16',NULL,NULL,0),(9,'Liquid',NULL,'2018-08-09 17:32:40',NULL,NULL,1),(10,'Juice',NULL,'2018-08-10 15:51:23',NULL,NULL,1),(11,'empty',NULL,'2018-08-13 15:54:11',NULL,NULL,0);
+/*!40000 ALTER TABLE `dosage_master` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `drug`
+--
+
+DROP TABLE IF EXISTS `drug`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `drug` (
+  `drug_id` int(11) NOT NULL AUTO_INCREMENT,
+  `drug_name` varchar(40) DEFAULT NULL,
+  `created_by` varchar(30) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` varchar(30) DEFAULT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`drug_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `drug`
+--
+
+LOCK TABLES `drug` WRITE;
+/*!40000 ALTER TABLE `drug` DISABLE KEYS */;
+INSERT INTO `drug` VALUES (1,'Aspirin',NULL,'2018-08-10 15:34:51','kavya','2018-08-10 15:34:51',0),(2,'Paracetomol',NULL,'2018-08-09 17:03:14','kavya','2018-08-09 17:03:14',1),(3,'Dolo 650','kavya','2018-07-21 21:20:45',NULL,'0000-00-00 00:00:00',1),(4,'Bruffin','kavya','2018-08-01 17:21:03','kavya','2018-08-01 17:21:03',1),(5,'Anacin','kavya','2018-08-09 17:32:16','kavya','2018-08-09 17:32:16',0),(6,'Crocin 60','kavya','2018-08-10 15:50:51','kavya','2018-08-10 15:50:51',0),(7,'Dolo650','kavya','2018-08-13 15:53:23','kavya','2018-08-13 15:53:23',1);
+/*!40000 ALTER TABLE `drug` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `drug_details_txn`
+--
+
+DROP TABLE IF EXISTS `drug_details_txn`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `drug_details_txn` (
+  `txn_id` int(11) NOT NULL AUTO_INCREMENT,
+  `medical_record_no` varchar(100) NOT NULL DEFAULT '',
+  `episode` varchar(100) NOT NULL DEFAULT '',
+  `visit` varchar(100) NOT NULL DEFAULT '',
+  `additional_notes` varchar(2000) DEFAULT NULL,
+  PRIMARY KEY (`txn_id`,`medical_record_no`,`episode`,`visit`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `drug_details_txn`
+--
+
+LOCK TABLES `drug_details_txn` WRITE;
+/*!40000 ALTER TABLE `drug_details_txn` DISABLE KEYS */;
+INSERT INTO `drug_details_txn` VALUES (6,'PT20188616381477','150','1','yes'),(7,'PT20188616381477','4','1','bfbf'),(8,'PT20188616381477','16','1','fdfdfdfffff'),(9,'PT20188616381477','36','1','');
+/*!40000 ALTER TABLE `drug_details_txn` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `drug_details_txn_dtls`
+--
+
+DROP TABLE IF EXISTS `drug_details_txn_dtls`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `drug_details_txn_dtls` (
+  `dtls_id` int(11) NOT NULL AUTO_INCREMENT,
+  `txn_id` int(11) DEFAULT NULL,
+  `drug_id` varchar(100) DEFAULT NULL,
+  `drug_name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`dtls_id`),
+  KEY `fk_key` (`txn_id`),
+  CONSTRAINT `drug_details_txn_dtls_ibfk_1` FOREIGN KEY (`txn_id`) REFERENCES `drug_details_txn` (`txn_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `drug_details_txn_dtls`
+--
+
+LOCK TABLES `drug_details_txn_dtls` WRITE;
+/*!40000 ALTER TABLE `drug_details_txn_dtls` DISABLE KEYS */;
+INSERT INTO `drug_details_txn_dtls` VALUES (8,6,'undefined','undefined'),(9,7,'1','Aspirin'),(10,7,'2','Paracetomol'),(11,8,'1','Aspirin'),(12,8,'2','Paracetomol'),(13,9,'2','Paracetomol'),(14,9,'5','Anacin');
+/*!40000 ALTER TABLE `drug_details_txn_dtls` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `facilitator`
+--
+
+DROP TABLE IF EXISTS `facilitator`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `facilitator` (
+  `facilitator_id` varchar(50) NOT NULL,
+  `first_name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
+  `address_line_1` varchar(255) DEFAULT NULL,
+  `address_line_2` varchar(255) DEFAULT NULL,
+  `country` varchar(50) DEFAULT NULL,
+  `district` varchar(50) DEFAULT NULL,
+  `zip` varchar(20) DEFAULT NULL,
+  `email_id` varchar(50) DEFAULT NULL,
+  `office_contact_no` varchar(50) DEFAULT NULL,
+  `office_extension` varchar(50) DEFAULT NULL,
+  `personal` varchar(50) DEFAULT NULL,
+  `created_by` varchar(50) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_by` varchar(20) DEFAULT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `state` varchar(50) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`facilitator_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `facilitator`
+--
+
+LOCK TABLES `facilitator` WRITE;
+/*!40000 ALTER TABLE `facilitator` DISABLE KEYS */;
+INSERT INTO `facilitator` VALUES ('5001','Anjireddy','Gopu','1-45','Ameerpet','1','1','522601','anji@gmail.com','96321045875','71521215413','8563210478','Ramya','2018-07-24 15:10:09','Ramya','2018-08-13 17:29:40','1','1');
+/*!40000 ALTER TABLE `facilitator` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `family_diseases`
+--
+
+DROP TABLE IF EXISTS `family_diseases`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `family_diseases` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `disease_name` varchar(300) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `family_diseases`
+--
+
+LOCK TABLES `family_diseases` WRITE;
+/*!40000 ALTER TABLE `family_diseases` DISABLE KEYS */;
+INSERT INTO `family_diseases` VALUES (1,'Heart Disease'),(2,'Cancer'),(3,'Asthama'),(4,'Diabetes');
+/*!40000 ALTER TABLE `family_diseases` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `family_history_txn`
+--
+
+DROP TABLE IF EXISTS `family_history_txn`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `family_history_txn` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `medical_record_no` varchar(30) DEFAULT NULL,
+  `additional_notes` varchar(2000) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `family_history_txn`
+--
+
+LOCK TABLES `family_history_txn` WRITE;
+/*!40000 ALTER TABLE `family_history_txn` DISABLE KEYS */;
+INSERT INTO `family_history_txn` VALUES (4,'PT20188616381477','notes');
+/*!40000 ALTER TABLE `family_history_txn` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `family_history_txn_dtls`
+--
+
+DROP TABLE IF EXISTS `family_history_txn_dtls`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `family_history_txn_dtls` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `family_history_txn_id` int(11) DEFAULT NULL,
+  `mother` tinyint(1) DEFAULT NULL,
+  `father` tinyint(1) DEFAULT NULL,
+  `brother` tinyint(1) DEFAULT NULL,
+  `sister` tinyint(1) DEFAULT NULL,
+  `paternal` tinyint(1) DEFAULT NULL,
+  `maternal` tinyint(1) DEFAULT NULL,
+  `family_disease_id` int(11) DEFAULT NULL,
+  `created_by` varchar(50) DEFAULT NULL,
+  `created_on` varchar(50) DEFAULT NULL,
+  `updated_by` varchar(50) DEFAULT NULL,
+  `updated_on` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_family` (`family_history_txn_id`),
+  CONSTRAINT `family_history_txn_dtls_ibfk_1` FOREIGN KEY (`family_history_txn_id`) REFERENCES `family_history_txn` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `family_history_txn_dtls`
+--
+
+LOCK TABLES `family_history_txn_dtls` WRITE;
+/*!40000 ALTER TABLE `family_history_txn_dtls` DISABLE KEYS */;
+INSERT INTO `family_history_txn_dtls` VALUES (102,4,0,1,0,1,1,1,1,'user','2018/8/10 T:12:29:24',NULL,NULL),(103,4,0,0,0,1,1,1,2,'user','2018/8/10 T:12:29:24',NULL,NULL),(104,4,0,0,1,1,1,1,3,'user','2018/8/10 T:12:29:24',NULL,NULL),(105,4,0,0,0,1,1,1,4,'user','2018/8/10 T:12:29:24',NULL,NULL);
+/*!40000 ALTER TABLE `family_history_txn_dtls` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `feedback`
+--
+
+DROP TABLE IF EXISTS `feedback`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `feedback` (
+  `feedback_id` int(10) NOT NULL AUTO_INCREMENT,
+  `feedback_description` varchar(2000) DEFAULT NULL,
+  `case_id` int(10) DEFAULT NULL,
+  `medical_record_no` varchar(50) DEFAULT NULL,
+  `episode_id` int(10) DEFAULT NULL,
+  `visit_id` int(10) DEFAULT NULL,
+  PRIMARY KEY (`feedback_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `feedback`
+--
+
+LOCK TABLES `feedback` WRITE;
+/*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
+INSERT INTO `feedback` VALUES (1,'sdfsfsfsf',80,NULL,NULL,NULL),(2,'ththfh',80,NULL,NULL,NULL),(3,'fgvdgfdg',80,NULL,NULL,NULL),(4,'vdvdvd',80,NULL,NULL,NULL),(5,'uygvghuyhn',80,NULL,NULL,NULL),(6,'ghhghg',80,NULL,NULL,NULL),(7,'sfdf',80,NULL,NULL,NULL),(8,'This is my feedback',298,NULL,NULL,NULL),(9,'Hai Anji.....',315,'undefined',16,1),(10,'euieujujf vujg',315,'PT20188616381477',16,1);
+/*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `file_uploading`
+--
+
+DROP TABLE IF EXISTS `file_uploading`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `file_uploading` (
+  `document_id` int(11) NOT NULL AUTO_INCREMENT,
+  `mr_no` varchar(50) DEFAULT NULL,
+  `episode_id` varchar(50) DEFAULT NULL,
+  `visit_id` varchar(50) DEFAULT NULL,
+  `document_name` varchar(255) DEFAULT NULL,
+  `document_link` varchar(300) DEFAULT NULL,
+  `content_type` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`document_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `file_uploading`
+--
+
+LOCK TABLES `file_uploading` WRITE;
+/*!40000 ALTER TABLE `file_uploading` DISABLE KEYS */;
+INSERT INTO `file_uploading` VALUES (1,'PT20188616381477','150','1','layout','dileep.png','png'),(2,'PT20188616381477','16','1','ff','1.3.6.1.4.1.14519.5.2.1.4334.1501.104457597348593375676967675653.dcm','dcm'),(3,'PT20188616381477','34','1','qwqw','1.3.6.1.4.1.14519.5.2.1.4334.1501.104457597348593375676967675653.dcm','dcm');
+/*!40000 ALTER TABLE `file_uploading` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `habits`
+--
+
+DROP TABLE IF EXISTS `habits`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `habits` (
+  `habit_id` int(11) NOT NULL AUTO_INCREMENT,
+  `habit_name` varchar(40) DEFAULT NULL,
+  `created_by` varchar(30) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` varchar(30) DEFAULT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`habit_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `habits`
+--
+
+LOCK TABLES `habits` WRITE;
+/*!40000 ALTER TABLE `habits` DISABLE KEYS */;
+INSERT INTO `habits` VALUES (1,'Drinking',NULL,'2018-07-31 22:36:40','haritha','2018-07-31 22:36:40',1),(2,'Smoking',NULL,'2018-08-01 17:25:27','haritha','2018-08-01 17:25:27',1),(3,'Reading','haritha','2018-08-01 17:26:05','haritha','2018-08-01 17:26:05',1),(4,'Eating','haritha','2018-08-09 19:03:57','haritha','2018-08-09 19:03:57',1),(5,'Nailbiting','haritha','2018-08-09 19:04:00','haritha','2018-08-09 19:04:00',1),(6,'Writing ','haritha','2018-08-16 14:57:57','haritha','2018-08-16 14:57:57',1),(7,'drinking','haritha','2018-08-13 15:55:58','haritha','2018-08-13 15:55:58',1),(8,'waking','haritha','2018-08-16 14:58:47','haritha','2018-08-16 14:58:47',0);
+/*!40000 ALTER TABLE `habits` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `habits_txn`
+--
+
+DROP TABLE IF EXISTS `habits_txn`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `habits_txn` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mediacl_record_no` varchar(30) DEFAULT NULL,
+  `additional_notes` varchar(2000) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mediacl_record_no` (`mediacl_record_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `habits_txn`
+--
+
+LOCK TABLES `habits_txn` WRITE;
+/*!40000 ALTER TABLE `habits_txn` DISABLE KEYS */;
+INSERT INTO `habits_txn` VALUES (3,'PT20188616381477','Aditional notes.'),(4,'PT201881315443711','dsvffhhg');
+/*!40000 ALTER TABLE `habits_txn` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `habits_txn_dtls`
+--
+
+DROP TABLE IF EXISTS `habits_txn_dtls`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `habits_txn_dtls` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `habit_txn_id` int(11) DEFAULT NULL,
+  `habit_id` int(11) DEFAULT NULL,
+  `description` varchar(30) DEFAULT NULL,
+  `created_by` varchar(20) DEFAULT NULL,
+  `created_on` varchar(100) DEFAULT NULL,
+  `updated_by` varchar(20) DEFAULT NULL,
+  `updated_on` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `txn_idfk` (`habit_txn_id`),
+  CONSTRAINT `txn_idfk` FOREIGN KEY (`habit_txn_id`) REFERENCES `habits_txn` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `habits_txn_dtls`
+--
+
+LOCK TABLES `habits_txn_dtls` WRITE;
+/*!40000 ALTER TABLE `habits_txn_dtls` DISABLE KEYS */;
+INSERT INTO `habits_txn_dtls` VALUES (1,3,3,'Tensions','Dileep','2018-08-13T05:56:15.097Z',NULL,NULL);
+/*!40000 ALTER TABLE `habits_txn_dtls` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `immunization`
+--
+
+DROP TABLE IF EXISTS `immunization`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `immunization` (
+  `immunization_id` int(30) NOT NULL AUTO_INCREMENT,
+  `immunization_name` varchar(30) DEFAULT NULL,
+  `created_by` varchar(30) DEFAULT NULL,
+  `created_on` varchar(30) DEFAULT NULL,
+  `updated_by` varchar(30) DEFAULT NULL,
+  `updated_on` varchar(30) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`immunization_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `immunization`
+--
+
+LOCK TABLES `immunization` WRITE;
+/*!40000 ALTER TABLE `immunization` DISABLE KEYS */;
+INSERT INTO `immunization` VALUES (1,'Meningo coccal',NULL,NULL,'siva','98201812',0),(2,'BCG',NULL,NULL,'siva','18201813',1),(3,'DPT',NULL,NULL,NULL,NULL,0),(4,'TT',NULL,NULL,NULL,NULL,0),(5,'DPT','anji','57201819',NULL,NULL,0),(6,'TT','anji','57201819',NULL,NULL,0),(7,'Influenza','anji','18201820','siva','18201820',0),(8,'DPT','anji','98201812',NULL,NULL,1),(9,'DPT','anji','98201812',NULL,NULL,1),(10,'DPT','anji','98201812',NULL,NULL,1),(11,'DPT','anji','98201812',NULL,NULL,1),(12,'DPT','anji','98201812',NULL,NULL,1),(13,'DPT','anji','98201812',NULL,NULL,1),(14,'DPT','anji','98201812',NULL,NULL,1),(15,'DPT','anji','98201812',NULL,NULL,1),(16,'DPT','anji','98201812',NULL,NULL,1),(17,'DPT','anji','98201812',NULL,NULL,1),(18,'DPT','anji','98201812',NULL,NULL,1),(19,'DPT','anji','98201812',NULL,NULL,1),(20,'DPT','anji','98201812',NULL,NULL,1),(21,'GHFFY','anji','98201812',NULL,NULL,1),(22,'GHFFY','anji','98201812',NULL,NULL,1),(23,'Mgc','anji','108201811',NULL,NULL,1),(24,'Mgc1','anji','108201811','siva','108201811',0),(25,'TTTT','anji','108201811','siva','108201811',1),(26,'tt','anji','138201810',NULL,NULL,0);
+/*!40000 ALTER TABLE `immunization` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `income_groups`
+--
+
+DROP TABLE IF EXISTS `income_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `income_groups` (
+  `income_group_id` int(11) NOT NULL AUTO_INCREMENT,
+  `income_group_name` varchar(40) DEFAULT NULL,
+  `created_on` varchar(30) DEFAULT NULL,
+  `created_by` varchar(30) DEFAULT NULL,
+  `updated_on` varchar(30) DEFAULT NULL,
+  `updated_by` varchar(30) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`income_group_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `income_groups`
+--
+
+LOCK TABLES `income_groups` WRITE;
+/*!40000 ALTER TABLE `income_groups` DISABLE KEYS */;
+INSERT INTO `income_groups` VALUES (78,'Upper Middle Class','30062018','mahesh','06/08/2018','mahesh',1),(79,'Middle Class','02072018','mahesh','09/08/2018','mahesh',0),(80,'Lower Middle Class','01082018','mahesh','09/08/2018','mahesh',0),(81,'Poor..','09082018','mahesh','09/08/2018','mahesh',1),(82,'Poor','10082018','mahesh','10/08/2018','mahesh',0),(83,'middle','13082018','mahesh',NULL,NULL,0);
+/*!40000 ALTER TABLE `income_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `languages`
+--
+
+DROP TABLE IF EXISTS `languages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `languages` (
+  `language_id` int(30) NOT NULL AUTO_INCREMENT,
+  `language_name` varchar(30) DEFAULT NULL,
+  `created_by` varchar(30) DEFAULT NULL,
+  `created_on` varchar(30) DEFAULT NULL,
+  `updated_by` varchar(30) DEFAULT NULL,
+  `updated_on` varchar(30) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`language_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `languages`
+--
+
+LOCK TABLES `languages` WRITE;
+/*!40000 ALTER TABLE `languages` DISABLE KEYS */;
+INSERT INTO `languages` VALUES (1,'Telugu','user','2018/7/21 T:15:6:50','user','2018/8/9 T:11:59:57',1),(2,'English','user','2018/7/21 T:15:7:13','user','2018/7/31 T:18:57:31',1),(3,'Tamil','user','2018/8/1 T:16:25:17','user','2018/8/9 T:12:0:1',1),(4,'Kanada','user','2018/8/7 T:11:7:15','user','2018/8/7 T:11:7:33',1),(5,'Hindi','user','2018/8/9 T:12:0:13','user','2018/8/9 T:12:0:13',1),(6,'Marati','user','2018/8/9 T:12:0:59','user','2018/8/9 T:12:1:16',1),(7,'Spanish','user','2018/8/9 T:12:6:34','user','2018/8/9 T:12:6:34',1),(8,'Tamil','user','2018/8/9 T:12:35:50','user','2018/8/9 T:12:36:8',0),(9,'Oriya','user','2018/8/10 T:11:9:39','user','2018/8/10 T:11:9:53',0),(10,'kannada','user','2018/8/13 T:11:0:23','user','2018/8/13 T:11:0:30',1);
+/*!40000 ALTER TABLE `languages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mobileotp`
+--
+
+DROP TABLE IF EXISTS `mobileotp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `mobileotp` (
+  `m_id` int(10) NOT NULL AUTO_INCREMENT,
+  `m_otp` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`m_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mobileotp`
+--
+
+LOCK TABLES `mobileotp` WRITE;
+/*!40000 ALTER TABLE `mobileotp` DISABLE KEYS */;
+INSERT INTO `mobileotp` VALUES (1,'gu6lgo'),(2,'opqx42'),(3,'k6lsj8');
+/*!40000 ALTER TABLE `mobileotp` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `nationality`
+--
+
+DROP TABLE IF EXISTS `nationality`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `nationality` (
+  `nationality_id` int(30) NOT NULL AUTO_INCREMENT,
+  `nationality_name` varchar(30) DEFAULT NULL,
+  `created_by` varchar(30) DEFAULT NULL,
+  `created_on` varchar(30) DEFAULT NULL,
+  `updated_by` varchar(30) DEFAULT NULL,
+  `updated_on` varchar(30) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`nationality_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `nationality`
+--
+
+LOCK TABLES `nationality` WRITE;
+/*!40000 ALTER TABLE `nationality` DISABLE KEYS */;
+INSERT INTO `nationality` VALUES (1,'Indian','user','2018/7/21 T:15:7:31','user','2018/8/7 T:11:8:7',1),(2,'AmericanIndian','user','2018/8/1 T:16:30:51','user','2018/8/9 T:12:1:37',0),(3,'American','user','2018/8/1 T:16:32:22','user','2018/8/9 T:12:1:39',0),(4,'Belgian','user','2018/8/1 T:16:33:27','user','2018/8/9 T:12:1:42',0),(5,'Canadian','user','2018/8/2 T:14:58:19','user','2018/8/9 T:12:1:45',0),(6,'Cameroonian','user','2018/8/2 T:15:2:36','user','2018/8/9 T:12:1:47',0),(7,'Austrian','user','2018/8/2 T:15:4:50','user','2018/8/9 T:12:1:50',0),(8,'Bolivian	','user','2018/8/9 T:12:2:20','user','2018/8/9 T:12:2:20',1),(9,'Italian..','user','2018/8/9 T:12:37:10','user','2018/8/9 T:12:37:19',0),(10,'Nepalian','user','2018/8/10 T:11:10:55','user','2018/8/10 T:11:11:8',1),(11,'India','user','2018/8/13 T:11:2:2','user','2018/8/13 T:11:2:32',1);
+/*!40000 ALTER TABLE `nationality` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `notes`
+--
+
+DROP TABLE IF EXISTS `notes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `notes` (
+  `id` int(100) NOT NULL AUTO_INCREMENT,
+  `medical_record_no` varchar(100) NOT NULL DEFAULT '',
+  `episode_id` varchar(100) NOT NULL DEFAULT '',
+  `visit_id` varchar(100) NOT NULL DEFAULT '',
+  `notes` varchar(2000) DEFAULT NULL,
+  PRIMARY KEY (`id`,`medical_record_no`,`episode_id`,`visit_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `notes`
+--
+
+LOCK TABLES `notes` WRITE;
+/*!40000 ALTER TABLE `notes` DISABLE KEYS */;
+INSERT INTO `notes` VALUES (44,'PT20188616381477','150','1','yes'),(45,'PT20188616381477','150','1','yes'),(46,'PT20188616381477','4','1','vfvbfv'),(47,'PT20188616381477','16','1','fefdfffv');
+/*!40000 ALTER TABLE `notes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `occupation`
+--
+
+DROP TABLE IF EXISTS `occupation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `occupation` (
+  `occupation_id` int(100) NOT NULL AUTO_INCREMENT,
+  `occupation_name` varchar(100) DEFAULT NULL,
+  `created_by` varchar(100) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` varchar(100) DEFAULT NULL,
+  `updated_on` varchar(100) DEFAULT NULL,
+  `active` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`occupation_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `occupation`
+--
+
+LOCK TABLES `occupation` WRITE;
+/*!40000 ALTER TABLE `occupation` DISABLE KEYS */;
+INSERT INTO `occupation` VALUES (1,'Project Manager',NULL,'2018-08-06 23:42:20',NULL,'2018-08-06 19:42:15','1'),(2,'Software Engineer',NULL,'2018-08-06 23:42:31',NULL,'2018-08-06 19:42:15','1'),(3,'Tax Department','raju','2018-08-06 23:42:36',NULL,'2018-08-06 19:42:15','0'),(4,'Farmer..','raju','2018-08-09 17:39:04',NULL,'2018-08-09 12:37:34','0'),(5,'Farmer','raju','2018-08-10 16:13:06',NULL,'2018-08-10 11:11:13','1'),(6,'Dailywageearner','raju','2018-08-13 16:01:43',NULL,'2018-08-13 11:02:54','1');
+/*!40000 ALTER TABLE `occupation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pasthistory`
+--
+
+DROP TABLE IF EXISTS `pasthistory`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pasthistory` (
+  `id` int(100) NOT NULL AUTO_INCREMENT,
+  `medical_record_no` varchar(100) DEFAULT NULL,
+  `medical_history` varchar(2000) DEFAULT NULL,
+  `surgical_history` varchar(500) DEFAULT NULL,
+  `medication_history` varchar(500) DEFAULT NULL,
+  `created_by` varchar(100) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` varchar(100) DEFAULT NULL,
+  `updated_on` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pasthistory`
+--
+
+LOCK TABLES `pasthistory` WRITE;
+/*!40000 ALTER TABLE `pasthistory` DISABLE KEYS */;
+INSERT INTO `pasthistory` VALUES (1,'PT2018861343138','bfbb','fdvbfbv','bfb','raju','2018-08-06 18:00:31',NULL,'2018-08-06 14:00:24'),(2,'PT20188616381477','raju','fgtff','fdgd','raju','2018-08-08 15:19:29',NULL,'2018-08-07 13:04:23');
+/*!40000 ALTER TABLE `pasthistory` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `patient_case_details`
+--
+
+DROP TABLE IF EXISTS `patient_case_details`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `patient_case_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mrno` varchar(50) DEFAULT NULL,
+  `episode_id` int(10) DEFAULT NULL,
+  `visit_id` int(10) DEFAULT NULL,
+  `posted` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=618 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `patient_case_details`
+--
+
+LOCK TABLES `patient_case_details` WRITE;
+/*!40000 ALTER TABLE `patient_case_details` DISABLE KEYS */;
+INSERT INTO `patient_case_details` VALUES (294,'PT20188616381477',1,1,'N'),(295,'PT20188616381477',1,2,'N'),(296,'PT20188616381477',1,3,'N'),(297,'PT20188616381477',1,4,'Y'),(298,'PT20188616381477',2,1,'Y'),(299,'PT20188616381477',2,5,'N'),(300,'PT20188616381477',3,1,'N'),(301,'PT20188616381477',3,6,'Y'),(302,'PT20188616381477',3,7,'N'),(303,'PT20188616381477',4,1,'Y'),(304,'PT20188616381477',5,1,'N'),(305,'PT20188616381477',6,1,'N'),(306,'PT20188616381477',7,1,'N'),(307,'PT20188616381477',8,1,'Y'),(308,'PT20188616381477',9,1,'Y'),(309,'PT20188616381477',10,1,'Y'),(310,'PT20188616381477',11,1,'N'),(311,'PT20188616381477',12,1,'N'),(312,'PT20188616381477',13,1,'N'),(313,'PT20188616381477',14,1,'N'),(314,'PT20188616381477',15,1,'N'),(315,'PT20188616381477',16,1,'Y'),(316,'PT20188616381477',17,1,'N'),(317,'PT20188616381477',18,1,'N'),(318,'PT20188616381477',19,1,'N'),(319,'PT20188616381477',20,1,'N'),(320,'PT20188616381477',21,1,'N'),(321,'PT20188616381477',22,1,'N'),(322,'PT20188616381477',23,1,'N'),(323,'PT20188616381477',24,1,'N'),(324,'PT20188616381477',25,1,'N'),(325,'PT20188616381477',26,1,'N'),(326,'PT20188616381477',27,1,'N'),(327,'PT20188616381477',28,1,'N'),(328,'PT20188616381477',29,1,'N'),(329,'PT20188616381477',30,1,'N'),(330,'PT20188616381477',31,1,'N'),(331,'PT20188616381477',32,1,'N'),(332,'PT20188616381477',33,1,'N'),(333,'PT20188616381477',34,1,'N'),(334,'PT20188616381477',35,1,'N'),(335,'PT20188616381477',36,1,'N'),(336,'PT20188616381477',37,1,'N'),(337,'PT20188616381477',38,1,'N'),(338,'PT20188616381477',39,1,'N'),(339,'PT20188616381477',40,1,'N'),(340,'PT20188616381477',41,1,'N'),(341,'PT20188616381477',42,1,'N'),(342,'PT20188616381477',43,1,'N'),(343,'PT20188616381477',44,1,'N'),(344,'PT20188616381477',45,1,'N'),(345,'PT20188616381477',46,1,'N'),(346,'PT20188616381477',47,1,'N'),(347,'PT20188616381477',48,1,'N'),(348,'PT20188616381477',49,1,'N'),(349,'PT20188616381477',50,1,'N'),(350,'PT20188616381477',51,1,'N'),(351,'PT20188616381477',52,1,'N'),(352,'PT20188616381477',53,1,'N'),(353,'PT20188616381477',54,1,'N'),(354,'PT20188616381477',55,1,'N'),(355,'PT20188616381477',56,1,'N'),(356,'PT20188616381477',57,1,'N'),(357,'PT20188616381477',58,1,'N'),(358,'PT20188616381477',59,1,'N'),(359,'PT20188616381477',60,1,'N'),(360,'PT20188616381477',61,1,'N'),(361,'PT20188616381477',62,1,'N'),(362,'PT20188616381477',63,1,'N'),(363,'PT20188616381477',64,1,'N'),(364,'PT20188616381477',65,1,'N'),(365,'PT20188616381477',66,1,'N'),(366,'PT20188616381477',67,1,'N'),(367,'PT20188616381477',68,1,'N'),(368,'PT20188616381477',69,1,'N'),(369,'PT20188616381477',70,1,'N'),(370,'PT20188616381477',71,1,'N'),(371,'PT20188616381477',72,1,'N'),(372,'PT20188616381477',73,1,'N'),(373,'PT20188616381477',74,1,'N'),(374,'PT20188616381477',75,1,'N'),(375,'PT20188616381477',76,1,'N'),(376,'PT20188616381477',77,1,'N'),(377,'PT20188616381477',78,1,'N'),(378,'PT20188616381477',79,1,'N'),(379,'PT20188616381477',80,1,'N'),(380,'PT20188616381477',81,1,'N'),(381,'PT20188616381477',82,1,'N'),(382,'PT20188616381477',83,1,'N'),(383,'PT20188616381477',84,1,'N'),(384,'PT20188616381477',85,1,'N'),(385,'PT20188616381477',86,1,'N'),(386,'PT20188616381477',87,1,'N'),(387,'PT20188616381477',88,1,'N'),(388,'PT20188616381477',89,1,'N'),(389,'PT20188616381477',90,1,'N'),(390,'PT20188616381477',91,1,'N'),(391,'PT20188616381477',92,1,'N'),(392,'PT20188616381477',93,1,'N'),(393,'PT20188616381477',94,1,'N'),(394,'PT20188616381477',95,1,'N'),(395,'PT20188616381477',96,1,'N'),(396,'PT20188616381477',97,1,'N'),(397,'PT20188616381477',98,1,'N'),(398,'PT20188616381477',99,1,'N'),(399,'PT20188616381477',100,1,'N'),(400,'PT20188616381477',101,1,'N'),(401,'PT20188616381477',102,1,'N'),(402,'PT20188616381477',103,1,'N'),(403,'PT20188616381477',104,1,'N'),(404,'PT20188616381477',105,1,'N'),(405,'PT20188616381477',106,1,'N'),(406,'PT20188616381477',107,1,'N'),(407,'PT20188616381477',108,1,'N'),(408,'PT20188616381477',109,1,'N'),(409,'PT20188616381477',110,1,'N'),(410,'PT20188616381477',111,1,'N'),(411,'PT20188616381477',112,1,'N'),(412,'PT20188616381477',113,1,'N'),(413,'PT20188616381477',113,8,'N'),(414,'PT20188616381477',114,1,'N'),(415,'PT20188616381477',115,1,'N'),(416,'PT20188616381477',116,1,'N'),(417,'PT20188616381477',117,1,'N'),(418,'PT20188616381477',118,1,'N'),(419,'PT20188616381477',119,1,'N'),(420,'PT20188616381477',120,1,'N'),(421,'PT20188616381477',121,1,'N'),(422,'PT20188616381477',122,1,'N'),(423,'PT20188616381477',123,1,'N'),(424,'PT20188616381477',124,1,'N'),(425,'PT20188616381477',125,1,'N'),(426,'PT20188616381477',126,1,'N'),(427,'PT20188616381477',127,1,'N'),(428,'PT20188616381477',128,1,'N'),(429,'PT20188616381477',129,1,'N'),(430,'PT20188616381477',130,1,'N'),(431,'PT20188616381477',131,1,'N'),(432,'PT20188616381477',132,1,'N'),(433,'PT20188616381477',133,1,'N'),(434,'PT20188616381477',134,1,'N'),(435,'PT20188616381477',135,1,'N'),(436,'PT20188616381477',136,1,'N'),(437,'PT20188616381477',137,1,'N'),(438,'PT20188616381477',138,1,'N'),(439,'PT20188616381477',139,1,'N'),(440,'PT20188616381477',140,1,'N'),(441,'PT20188616381477',141,1,'N'),(442,'PT20188616381477',142,1,'N'),(443,'PT20188616381477',143,1,'N'),(444,'PT20188616381477',144,1,'N'),(445,'PT20188616381477',145,1,'N'),(446,'PT20188616381477',146,1,'N'),(447,'PT20188616381477',147,1,'N'),(448,'PT201881315443711',1,1,'N'),(449,'PT201881315443711',2,1,'N'),(450,'PT201881315443711',3,1,'N'),(451,'PT201881315443711',4,1,'N'),(452,'PT201881315443711',5,1,'N'),(453,'PT201881315443711',6,1,'N'),(454,'PT201881315443711',7,1,'N'),(455,'PT201881315443711',8,1,'N'),(456,'PT201881315443711',9,1,'N'),(457,'PT201881315443711',10,1,'N'),(458,'PT201881315443711',11,1,'N'),(459,'PT201881315443711',12,1,'N'),(460,'PT201881315443711',13,1,'N'),(461,'PT201881315443711',14,1,'N'),(462,'PT201881315443711',15,1,'N'),(463,'PT201881315443711',16,1,'N'),(464,'PT201881315443711',17,1,'N'),(465,'PT201881315443711',18,1,'N'),(466,'PT201881315443711',19,1,'N'),(467,'PT201881315443711',20,1,'N'),(468,'PT201881315443711',21,1,'N'),(469,'PT201881315443711',22,1,'N'),(470,'PT201881315443711',23,1,'N'),(471,'PT201881315443711',24,1,'N'),(472,'PT201881315443711',25,1,'N'),(473,'PT201881315443711',26,1,'N'),(474,'PT201881315443711',27,1,'N'),(475,'PT201881315443711',28,1,'N'),(476,'PT201881315443711',29,1,'N'),(477,'PT201881315443711',30,1,'N'),(478,'PT201881315443711',31,1,'N'),(479,'PT201881315443711',32,1,'N'),(480,'PT201881315443711',33,1,'N'),(481,'PT201881315443711',34,1,'N'),(482,'PT201881315443711',35,1,'N'),(483,'PT201881315443711',36,1,'N'),(484,'PT201881315443711',37,1,'N'),(485,'PT201881315443711',38,1,'N'),(486,'PT201881315443711',39,1,'N'),(487,'PT201881315443711',40,1,'N'),(488,'PT201881315443711',41,1,'N'),(489,'PT201881315443711',42,1,'N'),(490,'PT201881315443711',43,1,'N'),(491,'PT201881315443711',44,1,'N'),(492,'PT201881315443711',45,1,'N'),(493,'PT201881315443711',46,1,'N'),(494,'PT201881315443711',47,1,'N'),(495,'PT201881315443711',48,1,'N'),(496,'PT201881315443711',49,1,'N'),(497,'PT201881315443711',50,1,'N'),(498,'PT201881315443711',51,1,'N'),(499,'PT201881315443711',52,1,'N'),(500,'PT201881315443711',53,1,'N'),(501,'PT201881315443711',54,1,'N'),(502,'PT201881315443711',55,1,'N'),(503,'PT201881315443711',56,1,'N'),(504,'PT201881315443711',57,1,'N'),(505,'PT201881315443711',58,1,'N'),(506,'PT201881315443711',59,1,'N'),(507,'PT201881315443711',60,1,'N'),(508,'PT201881315443711',61,1,'N'),(509,'PT201881315443711',62,1,'N'),(510,'PT201881315443711',63,1,'N'),(511,'PT20188616381477',148,1,'N'),(512,'PT201881315443711',64,1,'N'),(513,'PT201881315443711',65,1,'N'),(514,'PT201881315443711',66,1,'N'),(515,'PT201881315443711',67,1,'N'),(516,'PT201881315443711',68,1,'N'),(517,'PT201881315443711',69,1,'N'),(518,'PT201881315443711',70,1,'N'),(519,'PT201881315443711',71,1,'N'),(520,'PT201881315443711',72,1,'N'),(521,'PT201881315443711',73,1,'N'),(522,'PT20188616381477',149,1,'N'),(523,'PT201881315443711',74,1,'N'),(524,'PT201881315443711',75,1,'N'),(525,'PT201881315443711',76,1,'N'),(526,'PT20188616381477',150,1,'N'),(527,'PT201881315443711',77,1,'N'),(528,'PT201881315443711',78,1,'N'),(529,'PT201881315443711',79,1,'N'),(530,'PT20188616381477',151,1,'N'),(531,'PT201881315443711',80,1,'N'),(532,'PT201881315443711',81,1,'N'),(533,'PT20188616381477',152,1,'N'),(534,'PT201881315443711',82,1,'N'),(535,'PT201881315443711',83,1,'N'),(536,'PT201881315443711',84,1,'N'),(537,'PT201881315443711',85,1,'N'),(538,'PT201881315443711',86,1,'N'),(539,'PT201881315443711',87,1,'N'),(540,'PT201881315443711',88,1,'N'),(541,'PT201881315443711',89,1,'N'),(542,'PT201881315443711',90,1,'N'),(543,'PT20188616381477',152,9,'N'),(544,'PT201881315443711',91,1,'N'),(545,'PT201881315443711',92,1,'N'),(546,'PT201881315443711',93,1,'N'),(547,'PT20188616381477',153,1,'N'),(548,'PT20188616381477',154,1,'N'),(549,'PT201881315443711',94,1,'N'),(550,'PT201881315443711',95,1,'N'),(551,'PT201881315443711',96,1,'N'),(552,'PT201881315443711',97,1,'N'),(553,'PT201881315443711',98,1,'N'),(554,'PT201881315443711',99,1,'N'),(555,'PT201881315443711',100,1,'N'),(556,'PT201881315443711',101,1,'N'),(557,'PT201881315443711',102,1,'N'),(558,'PT201881315443711',103,1,'N'),(559,'PT201881315443711',104,1,'N'),(560,'PT201881315443711',105,1,'N'),(561,'PT201881315443711',106,1,'N'),(562,'PT201881315443711',107,1,'N'),(563,'PT201881315443711',108,1,'N'),(564,'PT201881315443711',109,1,'N'),(565,'PT201881315443711',110,1,'N'),(566,'PT201881315443711',111,1,'N'),(567,'PT201881315443711',112,1,'N'),(568,'PT201881315443711',113,1,'N'),(569,'PT201881315443711',114,1,'N'),(570,'PT201881315443711',115,1,'N'),(571,'PT201881315443711',116,1,'N'),(572,'PT201881315443711',117,1,'N'),(573,'PT201881315443711',118,1,'N'),(574,'PT201881315443711',119,1,'N'),(575,'PT201881315443711',120,1,'N'),(576,'PT201881315443711',121,1,'N'),(577,'PT201881315443711',122,1,'N'),(578,'PT201881315443711',123,1,'N'),(579,'PT201881315443711',124,1,'N'),(580,'PT201881315443711',125,1,'N'),(581,'PT201881315443711',126,1,'N'),(582,'PT201881315443711',127,1,'N'),(583,'PT201881315443711',128,1,'N'),(584,'PT201881315443711',129,1,'N'),(585,'PT201881315443711',130,1,'N'),(586,'PT201881315443711',131,1,'N'),(587,'PT201881315443711',132,1,'N'),(588,'PT201881315443711',133,1,'N'),(589,'PT201881315443711',134,1,'N'),(590,'PT201881315443711',135,1,'N'),(591,'PT201881315443711',136,1,'N'),(592,'PT201881315443711',137,1,'N'),(593,'PT201881315443711',138,1,'N'),(594,'PT201881315443711',139,1,'N'),(595,'PT201881315443711',140,1,'N'),(596,'PT201881315443711',141,1,'N'),(597,'PT201881315443711',142,1,'N'),(598,'PT201881315443711',143,1,'N'),(599,'PT201881315443711',144,1,'N'),(600,'PT201881315443711',145,1,'N'),(601,'PT201881315443711',146,1,'N'),(602,'PT201881315443711',147,1,'N'),(603,'PT201881315443711',148,1,'N'),(604,'PT201881315443711',149,1,'N'),(605,'PT201881315443711',150,1,'N'),(606,'PT201881315443711',151,1,'N'),(607,'PT201881315443711',152,1,'N'),(608,'PT201881315443711',153,1,'N'),(609,'PT201881315443711',154,1,'N'),(610,'PT201881315443711',155,1,'N'),(611,'PT201881315443711',156,1,'N'),(612,'PT201881315443711',157,1,'N'),(613,'PT20188616381477',155,1,'N'),(614,'PT20188616381477',156,1,'N'),(615,'PT201881315443711',158,1,'N'),(616,'PT201881315443711',159,1,'N'),(617,'PT20188616381477',157,1,'N');
+/*!40000 ALTER TABLE `patient_case_details` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `patient_immunization_txn`
+--
+
+DROP TABLE IF EXISTS `patient_immunization_txn`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `patient_immunization_txn` (
+  `pa_i_t_id` int(30) NOT NULL AUTO_INCREMENT,
+  `medical_record_no` varchar(20) DEFAULT NULL,
+  `notes` varchar(2000) DEFAULT NULL,
+  `created_by` varchar(30) DEFAULT NULL,
+  `created_on` varchar(30) DEFAULT NULL,
+  `updated_by` varchar(30) DEFAULT NULL,
+  `updated_on` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`pa_i_t_id`),
+  UNIQUE KEY `medical_record_no` (`medical_record_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `patient_immunization_txn`
+--
+
+LOCK TABLES `patient_immunization_txn` WRITE;
+/*!40000 ALTER TABLE `patient_immunization_txn` DISABLE KEYS */;
+INSERT INTO `patient_immunization_txn` VALUES (3,'PT20188616381477','df','anji','2018-08-06T22:34:50.858Z','anji','2018-08-09T07:19:50.172Z');
+/*!40000 ALTER TABLE `patient_immunization_txn` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `patient_immunization_txn_dtls`
+--
+
+DROP TABLE IF EXISTS `patient_immunization_txn_dtls`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `patient_immunization_txn_dtls` (
+  `id` int(30) NOT NULL AUTO_INCREMENT,
+  `pa_i_t_id` int(30) DEFAULT NULL,
+  `immunization_id` int(30) DEFAULT NULL,
+  `immunization_date` varchar(30) DEFAULT NULL,
+  `immunization_route` varchar(40) DEFAULT NULL,
+  `administration_site` varchar(40) DEFAULT NULL,
+  `dose_amount` varchar(20) DEFAULT NULL,
+  `dose_unit` varchar(30) DEFAULT NULL,
+  `dose_form` varchar(40) DEFAULT NULL,
+  `created_by` varchar(30) DEFAULT NULL,
+  `created_on` varchar(30) DEFAULT NULL,
+  `updated_by` varchar(30) DEFAULT NULL,
+  `updated_on` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `p_id` (`pa_i_t_id`),
+  KEY `i_id` (`immunization_id`),
+  CONSTRAINT `patient_immunization_txn_dtls_ibfk_1` FOREIGN KEY (`pa_i_t_id`) REFERENCES `patient_immunization_txn` (`pa_i_t_id`),
+  CONSTRAINT `patient_immunization_txn_dtls_ibfk_2` FOREIGN KEY (`immunization_id`) REFERENCES `immunization` (`immunization_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `patient_immunization_txn_dtls`
+--
+
+LOCK TABLES `patient_immunization_txn_dtls` WRITE;
+/*!40000 ALTER TABLE `patient_immunization_txn_dtls` DISABLE KEYS */;
+INSERT INTO `patient_immunization_txn_dtls` VALUES (6,3,2,'2018-08-14','ID','aa','70','gfbn','bfgb132',NULL,NULL,'anji','2018-08-09T07:19:50.172Z');
+/*!40000 ALTER TABLE `patient_immunization_txn_dtls` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `patient_registration`
+--
+
+DROP TABLE IF EXISTS `patient_registration`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `patient_registration` (
+  `record_no` varchar(50) NOT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `gender` varchar(50) DEFAULT NULL,
+  `date_of_birth` varchar(50) DEFAULT NULL,
+  `patient_age` int(20) DEFAULT NULL,
+  `marital_status` varchar(50) DEFAULT NULL,
+  `blood_group` varchar(20) DEFAULT NULL,
+  `language` varchar(50) DEFAULT NULL,
+  `aadhar_number` varchar(50) DEFAULT NULL,
+  `occupation` varchar(50) DEFAULT NULL,
+  `religion` varchar(50) DEFAULT NULL,
+  `nationality` varchar(255) DEFAULT NULL,
+  `income_group` varchar(255) DEFAULT NULL,
+  `address_line_1` varchar(255) DEFAULT NULL,
+  `address_line_2` varchar(255) DEFAULT NULL,
+  `address_line_3` varchar(300) DEFAULT NULL,
+  `email_id` varchar(100) DEFAULT NULL,
+  `mobile_number` varchar(20) DEFAULT NULL,
+  `phone_number` varchar(20) DEFAULT NULL,
+  `country` varchar(50) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `district` varchar(50) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `pincode` varchar(20) DEFAULT NULL,
+  `emergency_name` varchar(255) DEFAULT NULL,
+  `relationship` varchar(255) DEFAULT NULL,
+  `emergency_phone_number` varchar(20) DEFAULT NULL,
+  `emergency_mobile_number` varchar(20) DEFAULT NULL,
+  `created_by` varchar(255) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_by` varchar(255) DEFAULT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`record_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `patient_registration`
+--
+
+LOCK TABLES `patient_registration` WRITE;
+/*!40000 ALTER TABLE `patient_registration` DISABLE KEYS */;
+INSERT INTO `patient_registration` VALUES ('PT201881315443711','Dileep','Kumar','1','2016-02-16',2,' 1','1','1','1234 5678 3338','1','1','1','78','1-10','Ameerpet','Sathyam','anji@gmail.com','9542610389','01450148752','1','1','1','1','515721','Chandrakumar','Husband','87485584444','9848022338','ramya','2018-08-13 19:44:37',NULL,'0000-00-00 00:00:00'),('PT20188616381477','Krishana','N','1','1968-07-31',50,' 1','3','1','8765 5555 5555','3','1','1','78','200','SRNagar','Hello','demo@yahoo.co.in','8765555522','77777777777','1','1','1','2','522403','Balram','Brother','88777777733','7775666777','ramya','2018-08-06 20:38:14','ramya','2018-08-13 17:34:08');
+/*!40000 ALTER TABLE `patient_registration` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `patient_vitals_txn`
+--
+
+DROP TABLE IF EXISTS `patient_vitals_txn`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `patient_vitals_txn` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `medical_record_no` varchar(100) NOT NULL DEFAULT '',
+  `episode_id` varchar(100) NOT NULL DEFAULT '',
+  `visit_id` varchar(100) NOT NULL DEFAULT '',
+  `weight` varchar(50) DEFAULT NULL,
+  `weight_unit` varchar(50) DEFAULT NULL,
+  `height1` varchar(50) DEFAULT NULL,
+  `height1_unit` varchar(50) DEFAULT NULL,
+  `height2` varchar(50) DEFAULT NULL,
+  `height2_unit` varchar(30) DEFAULT NULL,
+  `bmi` varchar(100) DEFAULT NULL,
+  `bp_systolic` varchar(100) DEFAULT NULL,
+  `bp_diastolic` varchar(100) DEFAULT NULL,
+  `temperature` varchar(100) DEFAULT NULL,
+  `pulse_rate` varchar(100) DEFAULT NULL,
+  `pulse_pattern` varchar(100) DEFAULT NULL,
+  `pulse_volume` varchar(100) DEFAULT NULL,
+  `additional_notes` varchar(2000) DEFAULT NULL,
+  `created_by` varchar(100) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` varchar(100) DEFAULT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`,`medical_record_no`,`episode_id`,`visit_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `patient_vitals_txn`
+--
+
+LOCK TABLES `patient_vitals_txn` WRITE;
+/*!40000 ALTER TABLE `patient_vitals_txn` DISABLE KEYS */;
+INSERT INTO `patient_vitals_txn` VALUES (1,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(2,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(3,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(4,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(5,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(6,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(7,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(8,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(9,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(10,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(11,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(12,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(13,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(14,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(15,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(16,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(17,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(18,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(19,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(20,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(21,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(22,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(23,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(24,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(25,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(26,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(27,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(28,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(29,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(30,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(31,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(32,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(33,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(34,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(35,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(36,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(37,'PT201881315443711','94','1','','select','0','select','0','select','0','','','116','','','','','haritha','2018-08-16 15:18:00','haritha','2018-08-16 15:18:00'),(38,'PT20188616381477','1','1','','select','0','select','0','select','0','','','110','','','','','haritha','2018-08-16 15:02:41','haritha','2018-08-16 15:02:41'),(39,'PT201881315443711','94','1','','select','0','select','0','select','0','','','116','','','','','haritha','2018-08-16 15:18:00','haritha','2018-08-16 15:18:00');
+/*!40000 ALTER TABLE `patient_vitals_txn` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `physical_exam_txn`
+--
+
+DROP TABLE IF EXISTS `physical_exam_txn`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `physical_exam_txn` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `medical_record_no` varchar(100) NOT NULL DEFAULT '',
+  `episode_id` varchar(100) NOT NULL DEFAULT '',
+  `visit_id` varchar(100) NOT NULL DEFAULT '',
+  `notes` varchar(2000) DEFAULT NULL,
+  PRIMARY KEY (`id`,`medical_record_no`,`visit_id`,`episode_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `physical_exam_txn`
+--
+
+LOCK TABLES `physical_exam_txn` WRITE;
+/*!40000 ALTER TABLE `physical_exam_txn` DISABLE KEYS */;
+INSERT INTO `physical_exam_txn` VALUES (1,'PT20188616381477','110','1','ytygtytg............'),(2,'PT20188616381477','111','1','yhtgyhtgy'),(3,'PT20188616381477','119','1','bfgh');
+/*!40000 ALTER TABLE `physical_exam_txn` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `physical_exam_txn_dtls`
+--
+
+DROP TABLE IF EXISTS `physical_exam_txn_dtls`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `physical_exam_txn_dtls` (
+  `exam_id` int(11) NOT NULL AUTO_INCREMENT,
+  `exam_type` varchar(30) DEFAULT NULL,
+  `exam_specific` varchar(30) DEFAULT NULL,
+  `status` varchar(30) DEFAULT NULL,
+  `description` varchar(300) DEFAULT NULL,
+  `exam_progress` varchar(30) DEFAULT NULL,
+  `exam_date` varchar(30) DEFAULT NULL,
+  `physical_exam_txn_id` int(11) DEFAULT NULL,
+  `created_by` varchar(100) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` varchar(100) DEFAULT NULL,
+  `updated_on` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`exam_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `physical_exam_txn_dtls`
+--
+
+LOCK TABLES `physical_exam_txn_dtls` WRITE;
+/*!40000 ALTER TABLE `physical_exam_txn_dtls` DISABLE KEYS */;
+INSERT INTO `physical_exam_txn_dtls` VALUES (1,'Inspection','pulse_rate','normal','tguy','normal','2018-08-15',1,'kavya','2018-08-13 15:01:06','kavya',NULL),(2,'Palpation','pulse_rate','normal','vbnvb','aggrevate','2018-08-22',1,'kavya','2018-08-13 15:01:26','kavya',NULL),(3,'Inspection','pulse_rate','normal','fyhftgyh','normal','2018-08-29',2,'kavya','2018-08-13 15:01:48','kavya',NULL),(4,'select','select','select','','select','',3,'kavya','2018-08-13 16:24:54','kavya',NULL);
+/*!40000 ALTER TABLE `physical_exam_txn_dtls` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `poc`
+--
+
+DROP TABLE IF EXISTS `poc`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `poc` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `otp` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `poc`
+--
+
+LOCK TABLES `poc` WRITE;
+/*!40000 ALTER TABLE `poc` DISABLE KEYS */;
+INSERT INTO `poc` VALUES (4,'94bwm0'),(5,'nusdxo'),(6,'ykpuhb'),(7,'k8eri5');
+/*!40000 ALTER TABLE `poc` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `post_case`
+--
+
+DROP TABLE IF EXISTS `post_case`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `post_case` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `case_id` int(10) DEFAULT NULL,
+  `expert_center_id` varchar(50) DEFAULT NULL,
+  `doctor_id` varchar(50) DEFAULT NULL,
+  `query` varchar(2000) DEFAULT NULL,
+  `medical_record_no` varchar(50) DEFAULT NULL,
+  `episode_id` int(10) DEFAULT NULL,
+  `visit_id` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pc_id` (`case_id`),
+  CONSTRAINT `post_case_ibfk_1` FOREIGN KEY (`case_id`) REFERENCES `patient_case_details` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `post_case`
+--
+
+LOCK TABLES `post_case` WRITE;
+/*!40000 ALTER TABLE `post_case` DISABLE KEYS */;
+INSERT INTO `post_case` VALUES (15,295,'3001','3001','dfgdg	\n											',NULL,NULL,NULL),(16,296,'3001','3001','	fsdfdfgd\n														',NULL,NULL,NULL),(17,297,'3001','3001','fsfsfsf	\n														',NULL,NULL,NULL),(18,298,'3001','3001','fdfdsfg	\n														',NULL,NULL,NULL),(19,301,'3001','3001','efefedf	\n														','undefined',3,6),(20,303,'3001','3001','gfgfrg\n														','undefined',4,1),(21,307,'3001','3001','dffsdfef	\n														','undefined',8,1),(22,308,'3001','3001','	\n								gfdgfg						','undefined',9,1),(23,309,'3001','3001','	ggf\n														','PT20188616381477',10,1),(24,315,'3001','3001','jhgbjghb\n														','PT20188616381477',16,1);
+/*!40000 ALTER TABLE `post_case` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `religion`
+--
+
+DROP TABLE IF EXISTS `religion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `religion` (
+  `religion_id` int(11) NOT NULL AUTO_INCREMENT,
+  `religion_name` varchar(40) DEFAULT NULL,
+  `created_by` varchar(30) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` varchar(30) DEFAULT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `active` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`religion_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `religion`
+--
+
+LOCK TABLES `religion` WRITE;
+/*!40000 ALTER TABLE `religion` DISABLE KEYS */;
+INSERT INTO `religion` VALUES (1,'Hindu',NULL,'2018-08-02 18:50:20',NULL,'0000-00-00 00:00:00',1),(2,'Islam',NULL,'2018-08-01 00:27:25',NULL,'0000-00-00 00:00:00',0),(3,'Islamic','pavan','2018-08-02 18:52:07',NULL,'0000-00-00 00:00:00',1),(4,'Jainism','pavan','2018-08-02 18:52:50',NULL,'0000-00-00 00:00:00',1),(5,'Muslim..','pavan','2018-08-09 17:42:41',NULL,'0000-00-00 00:00:00',0),(6,'Sikhism','pavan','2018-08-10 16:14:22',NULL,'0000-00-00 00:00:00',1),(7,'Hindu','pavan','2018-08-13 16:03:40',NULL,'0000-00-00 00:00:00',1);
+/*!40000 ALTER TABLE `religion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `salutation`
+--
+
+DROP TABLE IF EXISTS `salutation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `salutation` (
+  `salutation_id` int(255) NOT NULL AUTO_INCREMENT,
+  `salutation_name` varchar(25) DEFAULT NULL,
+  `created_by` varchar(255) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` varchar(255) DEFAULT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`salutation_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `salutation`
+--
+
+LOCK TABLES `salutation` WRITE;
+/*!40000 ALTER TABLE `salutation` DISABLE KEYS */;
+INSERT INTO `salutation` VALUES (5,'Mr','arvind@myapp.com','2018-08-09 17:07:02','aravind','2018-08-09 17:07:02',1),(6,'Dr','arvind@myapp.com','2018-07-31 23:12:53','aravind','2018-07-31 23:12:53',1),(7,'Ms','arvind@myapp.com','2018-08-09 17:08:09','aravind','2018-08-09 17:08:09',1),(8,'Dr','arvind@myapp.com','2018-08-09 17:09:12','aravind','2018-08-09 17:09:12',0),(9,'Mr','arvind@myapp.com','2018-08-09 17:14:11',NULL,'0000-00-00 00:00:00',1),(10,'MR','arvind@myapp.com','2018-08-10 15:47:17','aravind','2018-08-10 15:47:17',0),(11,'Miss','arvind@myapp.com','2018-08-10 15:47:34',NULL,'0000-00-00 00:00:00',1),(12,'PHD','arvind@myapp.com','2018-08-10 16:15:45','aravind','2018-08-10 16:15:45',1),(13,'Ms','arvind@myapp.com','2018-08-13 16:05:38','aravind','2018-08-13 16:05:38',1);
+/*!40000 ALTER TABLE `salutation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sign_txn`
+--
+
+DROP TABLE IF EXISTS `sign_txn`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sign_txn` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `medical_record_no` varchar(50) NOT NULL DEFAULT '',
+  `episode_id` int(11) NOT NULL DEFAULT '0',
+  `visit_id` int(11) NOT NULL DEFAULT '0',
+  `additional_notes` varchar(2000) DEFAULT NULL,
+  PRIMARY KEY (`id`,`medical_record_no`,`episode_id`,`visit_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sign_txn`
+--
+
+LOCK TABLES `sign_txn` WRITE;
+/*!40000 ALTER TABLE `sign_txn` DISABLE KEYS */;
+INSERT INTO `sign_txn` VALUES (1,'PT20188616381477',149,1,''),(2,'PT20188616381477',152,1,'fgdfhhgf'),(3,'PT20188616381477',1,1,'rytr243'),(4,'PT20188616381477',161,1,'jhdgj'),(5,'PT20188616381477',4,1,'xc xzccsxc'),(6,'PT20188616381477',11,1,'hggh'),(7,'PT20188616381477',13,1,'grgreg'),(8,'PT20188616381477',37,1,'gytfgty'),(9,'PT20188616381477',105,1,'bfbfbf'),(10,'PT20188616381477',115,1,'additional'),(11,'PT20188616381477',118,1,'Additional Notes.'),(12,'PT201881315443711',95,1,'ghghdfhggg');
+/*!40000 ALTER TABLE `sign_txn` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sign_txn_dtls`
+--
+
+DROP TABLE IF EXISTS `sign_txn_dtls`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sign_txn_dtls` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sign_txn_id` int(11) DEFAULT NULL,
+  `sign_id` int(11) DEFAULT NULL,
+  `description` varchar(2000) DEFAULT NULL,
+  `created_by` varchar(30) DEFAULT NULL,
+  `created_on` varchar(30) DEFAULT NULL,
+  `updated_by` varchar(50) DEFAULT NULL,
+  `updated_on` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_sign` (`sign_txn_id`),
+  KEY `fk_sign1` (`sign_id`),
+  CONSTRAINT `sign_txn_dtls_ibfk_1` FOREIGN KEY (`sign_txn_id`) REFERENCES `sign_txn` (`id`),
+  CONSTRAINT `sign_txn_dtls_ibfk_2` FOREIGN KEY (`sign_id`) REFERENCES `signs` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sign_txn_dtls`
+--
+
+LOCK TABLES `sign_txn_dtls` WRITE;
+/*!40000 ALTER TABLE `sign_txn_dtls` DISABLE KEYS */;
+INSERT INTO `sign_txn_dtls` VALUES (1,5,2,'cvxdcvzx','aravind','2018-08-10T00:40:56.719Z',NULL,NULL),(2,5,1,'csxc',NULL,NULL,'aravind','2018-08-10T00:41:06.647Z'),(3,7,1,'gggrg','aravind','2018-08-10T16:08:53.721Z',NULL,NULL),(4,9,2,'rfggvf','aravind','2018-08-13T14:43:35.471Z',NULL,NULL),(5,9,1,'',NULL,NULL,'aravind','2018-08-13T14:43:50.334Z'),(6,10,1,'dsfgsdg','aravind','2018-08-13T05:46:22.164Z',NULL,NULL);
+/*!40000 ALTER TABLE `sign_txn_dtls` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `signs`
+--
+
+DROP TABLE IF EXISTS `signs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `signs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sign_name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `signs`
+--
+
+LOCK TABLES `signs` WRITE;
+/*!40000 ALTER TABLE `signs` DISABLE KEYS */;
+INSERT INTO `signs` VALUES (1,'Headache'),(2,'Fever '),(3,'Cough'),(4,'Body aches'),(5,'Sore throat');
+/*!40000 ALTER TABLE `signs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `specialities`
+--
+
+DROP TABLE IF EXISTS `specialities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `specialities` (
+  `specialization_id` int(255) NOT NULL AUTO_INCREMENT,
+  `specialization_name` varchar(255) DEFAULT NULL,
+  `created_by` varchar(255) DEFAULT NULL,
+  `created_on` varchar(255) DEFAULT NULL,
+  `updated_by` varchar(255) DEFAULT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`specialization_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `specialities`
+--
+
+LOCK TABLES `specialities` WRITE;
+/*!40000 ALTER TABLE `specialities` DISABLE KEYS */;
+INSERT INTO `specialities` VALUES (1,'Dermotology','arvind@myapp.com','undefined','aravind','2018-08-10 15:45:55',1),(2,'Neurology','arvind@myapp.com','undefined','aravind','2018-08-07 00:25:47',1),(3,'Oncology','arvind@myapp.com',NULL,NULL,'2018-08-09 17:09:57',1),(4,'Cardiology','arvind@myapp.com',NULL,'aravind','2018-08-10 15:46:05',1),(5,'Psychology','arvind@myapp.com',NULL,NULL,'2018-08-10 15:46:49',1),(6,'Gynocology','arvind@myapp.com',NULL,'aravind','2018-08-13 16:06:49',1),(7,'Oncology','arvind@myapp.com',NULL,NULL,'2018-08-13 16:06:34',0);
+/*!40000 ALTER TABLE `specialities` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `states`
+--
+
+DROP TABLE IF EXISTS `states`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `states` (
+  `state_id` int(30) NOT NULL AUTO_INCREMENT,
+  `state_name` varchar(25) DEFAULT NULL,
+  `country_id` int(30) DEFAULT NULL,
+  `created_by` varchar(30) DEFAULT NULL,
+  `created_on` varchar(30) DEFAULT NULL,
+  `updated_by` varchar(30) DEFAULT NULL,
+  `updated_on` varchar(30) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`state_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `states`
+--
+
+LOCK TABLES `states` WRITE;
+/*!40000 ALTER TABLE `states` DISABLE KEYS */;
+INSERT INTO `states` VALUES (1,'Andhra Pradesh',1,NULL,NULL,'siva','68201820',1),(2,'Telangana',1,NULL,NULL,NULL,NULL,1),(3,'Tamilanadu',1,NULL,NULL,NULL,NULL,1),(4,'Karnataka',1,NULL,NULL,'siva','68201820',0),(5,'Kerala',1,NULL,NULL,NULL,NULL,1),(6,'Daga',2,NULL,NULL,NULL,NULL,1),(7,'Chhukha',5,NULL,NULL,'siva','98201812',0),(8,'Maharastra',1,'anji','98201812',NULL,NULL,1),(9,'Rajasthan',1,'anji','108201811','siva','108201811',0),(10,'Telangana',1,'anji','138201811','siva','138201811',1);
+/*!40000 ALTER TABLE `states` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `symptoms`
+--
+
+DROP TABLE IF EXISTS `symptoms`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `symptoms` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `symptom_name` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `symptoms`
+--
+
+LOCK TABLES `symptoms` WRITE;
+/*!40000 ALTER TABLE `symptoms` DISABLE KEYS */;
+INSERT INTO `symptoms` VALUES (1,'Rashes'),(2,'Elergy'),(3,'Weight loss'),(4,'Headache');
+/*!40000 ALTER TABLE `symptoms` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `symptoms_txn`
+--
+
+DROP TABLE IF EXISTS `symptoms_txn`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `symptoms_txn` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `medical_record_no` varchar(50) NOT NULL DEFAULT '',
+  `episode_id` int(11) NOT NULL DEFAULT '0',
+  `visit_id` int(11) NOT NULL DEFAULT '0',
+  `additional_notes` varchar(5000) DEFAULT NULL,
+  PRIMARY KEY (`id`,`medical_record_no`,`visit_id`,`episode_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `symptoms_txn`
+--
+
+LOCK TABLES `symptoms_txn` WRITE;
+/*!40000 ALTER TABLE `symptoms_txn` DISABLE KEYS */;
+INSERT INTO `symptoms_txn` VALUES (1,'PT20188616381477',108,1,'hhkihkhknknk'),(2,'PT20188616381477',109,1,',nmihikhh'),(3,'PT20188616381477',118,1,'Notes');
+/*!40000 ALTER TABLE `symptoms_txn` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `symptoms_txn_dtls`
+--
+
+DROP TABLE IF EXISTS `symptoms_txn_dtls`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `symptoms_txn_dtls` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `symptoms_txn_id` int(11) DEFAULT NULL,
+  `symptoms_id` int(11) DEFAULT NULL,
+  `description` varchar(5000) DEFAULT NULL,
+  `created_by` varchar(30) DEFAULT NULL,
+  `created_on` varchar(30) DEFAULT NULL,
+  `updated_by` varchar(30) DEFAULT NULL,
+  `updated_on` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `symptoms_txn_dtls`
+--
+
+LOCK TABLES `symptoms_txn_dtls` WRITE;
+/*!40000 ALTER TABLE `symptoms_txn_dtls` DISABLE KEYS */;
+INSERT INTO `symptoms_txn_dtls` VALUES (1,1,1,'yukii','aravind','2018-08-13T14:57:37.672Z',NULL,NULL),(2,1,2,'nknmkn',NULL,NULL,'aravind','2018-08-13T14:57:54.720Z'),(3,2,1,'jmlm','aravind','2018-08-13T14:58:13.569Z',NULL,NULL),(4,3,1,'Due to water problem','aravind','2018-08-13T05:54:32.148Z',NULL,NULL);
+/*!40000 ALTER TABLE `symptoms_txn_dtls` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `test`
+--
+
+DROP TABLE IF EXISTS `test`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `test` (
+  `test_id` int(5) NOT NULL AUTO_INCREMENT,
+  `test_name` varchar(50) DEFAULT NULL,
+  `test_group_id` int(11) DEFAULT NULL,
+  `created_by` varchar(50) DEFAULT NULL,
+  `created_on` varchar(50) DEFAULT NULL,
+  `updated_by` varchar(50) DEFAULT NULL,
+  `updated_on` varchar(50) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`test_id`),
+  KEY `test_group_id` (`test_group_id`),
+  CONSTRAINT `test_ibfk_1` FOREIGN KEY (`test_group_id`) REFERENCES `test_group` (`test_group_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `test`
+--
+
+LOCK TABLES `test` WRITE;
+/*!40000 ALTER TABLE `test` DISABLE KEYS */;
+INSERT INTO `test` VALUES (1,'Ctscan',2,'arvind','2018-07-26T17:44:05.338Z','arvind','2018-08-09T06:48:04.948Z',0),(2,'MRIscans',2,'arvind','2018-07-26T17:47:40.032Z','arvind','2018-08-01T00:18:01.549Z',0),(3,'Xray',3,'arvind','2018-07-26T18:02:53.233Z','arvind','2018-08-09T06:47:49.260Z',1),(4,'MRI Scan.',1,'arvind','2018-08-10T06:54:43.282Z','arvind','2018-08-10T06:54:52.860Z',1);
+/*!40000 ALTER TABLE `test` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `test_details_txn`
+--
+
+DROP TABLE IF EXISTS `test_details_txn`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `test_details_txn` (
+  `medical_record_no` varchar(50) NOT NULL DEFAULT '',
+  `episode` varchar(10) NOT NULL DEFAULT '',
+  `visit_id` varchar(10) NOT NULL DEFAULT '',
+  `notes` varchar(2000) DEFAULT NULL,
+  `txn_id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`txn_id`,`medical_record_no`,`episode`,`visit_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `test_details_txn`
+--
+
+LOCK TABLES `test_details_txn` WRITE;
+/*!40000 ALTER TABLE `test_details_txn` DISABLE KEYS */;
+INSERT INTO `test_details_txn` VALUES ('PT20188616381477','150','1','',61),('PT20188616381477','4','1','fbfbf',62),('PT20188616381477','16','1','frgrgregrerghr',63),('PT20188616381477','26','1','',64),('PT20188616381477','27','1','',65);
+/*!40000 ALTER TABLE `test_details_txn` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `test_details_txn_dtls`
+--
+
+DROP TABLE IF EXISTS `test_details_txn_dtls`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `test_details_txn_dtls` (
+  `test_name` varchar(20) DEFAULT NULL,
+  `test_id` varchar(20) DEFAULT NULL,
+  `txn_id` int(11) DEFAULT NULL,
+  KEY `fk_test` (`txn_id`),
+  CONSTRAINT `test_details_txn_dtls_ibfk_1` FOREIGN KEY (`txn_id`) REFERENCES `test_details_txn` (`txn_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `test_details_txn_dtls`
+--
+
+LOCK TABLES `test_details_txn_dtls` WRITE;
+/*!40000 ALTER TABLE `test_details_txn_dtls` DISABLE KEYS */;
+INSERT INTO `test_details_txn_dtls` VALUES ('undefined','undefined',61),('Ctscan','1',62),('MRIscans','2',62),('Xray','3',62),('Ctscan','1',63),('MRIscans','2',63),('Xray','3',63),('undefined','null',64),('undefined','null',65);
+/*!40000 ALTER TABLE `test_details_txn_dtls` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `test_group`
+--
+
+DROP TABLE IF EXISTS `test_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `test_group` (
+  `test_group_id` int(10) NOT NULL AUTO_INCREMENT,
+  `test_group_name` varchar(255) DEFAULT NULL,
+  `created_by` varchar(255) DEFAULT NULL,
+  `created_on` varchar(255) DEFAULT NULL,
+  `updated_by` varchar(255) DEFAULT NULL,
+  `updated_on` varchar(255) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`test_group_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `test_group`
+--
+
+LOCK TABLES `test_group` WRITE;
+/*!40000 ALTER TABLE `test_group` DISABLE KEYS */;
+INSERT INTO `test_group` VALUES (1,'Radiology','arvind','2018-07-02T11:16:40.872Z','arvind','2018-08-07T00:22:21.739Z',1),(2,'Dermotology','arvind','2018-07-02T11:16:54.238Z','arvind','2018-07-31T23:27:01.481Z',0),(3,'Oncology','arvind','2018-08-02T00:12:09.584Z',NULL,NULL,1),(4,'Echocardiography','arvind','2018-08-02T00:14:51.224Z','arvind','2018-08-09T06:42:46.853Z',0),(5,'Oncology','arvind','2018-08-09T07:17:21.008Z','arvind','2018-08-09T07:17:28.855Z',0),(6,'Radiography','arvind','2018-08-10T05:46:38.036Z','arvind','2018-08-13T05:43:10.883Z',0);
+/*!40000 ALTER TABLE `test_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `th_messages`
+--
+
+DROP TABLE IF EXISTS `th_messages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `th_messages` (
+  `id` int(50) NOT NULL AUTO_INCREMENT,
+  `assigneduser_id` int(80) DEFAULT NULL,
+  `user_id` varchar(100) DEFAULT NULL,
+  `message` varchar(2000) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `th_messages`
+--
+
+LOCK TABLES `th_messages` WRITE;
+/*!40000 ALTER TABLE `th_messages` DISABLE KEYS */;
+/*!40000 ALTER TABLE `th_messages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tm_expert_center`
+--
+
+DROP TABLE IF EXISTS `tm_expert_center`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tm_expert_center` (
+  `facility_center_id` varchar(255) NOT NULL,
+  `facility_center_name` varchar(255) DEFAULT NULL,
+  `address_line1` varchar(255) DEFAULT NULL,
+  `address_line2` varchar(255) DEFAULT NULL,
+  `country` varchar(50) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `district` varchar(50) DEFAULT NULL,
+  `zip` varchar(50) DEFAULT NULL,
+  `longitude` varchar(255) DEFAULT NULL,
+  `latitude` varchar(255) DEFAULT NULL,
+  `contact_person_name` varchar(255) DEFAULT NULL,
+  `email_id` varchar(50) DEFAULT NULL,
+  `contact_no1` varchar(50) DEFAULT NULL,
+  `contact_no2` varchar(50) DEFAULT NULL,
+  `fax` varchar(255) DEFAULT NULL,
+  `created_by` varchar(50) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_by` varchar(50) DEFAULT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `city` varchar(50) DEFAULT NULL,
+  `password` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`facility_center_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tm_expert_center`
+--
+
+LOCK TABLES `tm_expert_center` WRITE;
+/*!40000 ALTER TABLE `tm_expert_center` DISABLE KEYS */;
+INSERT INTO `tm_expert_center` VALUES ('3001','Apolo','1-10','Banjarahills','1','1','1','522601','500','200','Krishna','krishna@gmail.com','9632014587','04023651478','5646351463789874','Ramya','2018-07-24 00:06:07','Ramya','2018-08-13 17:29:24',1,'1','Xyz@1234');
+/*!40000 ALTER TABLE `tm_expert_center` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tm_satellite_center`
+--
+
+DROP TABLE IF EXISTS `tm_satellite_center`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tm_satellite_center` (
+  `facility_center_id` varchar(255) NOT NULL,
+  `facility_center_name` varchar(255) DEFAULT NULL,
+  `address_line1` varchar(255) DEFAULT NULL,
+  `address_line2` varchar(255) DEFAULT NULL,
+  `country` varchar(50) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `district` varchar(50) DEFAULT NULL,
+  `zip` varchar(50) DEFAULT NULL,
+  `longitude` varchar(255) DEFAULT NULL,
+  `latitude` varchar(255) DEFAULT NULL,
+  `contact_person_name` varchar(255) DEFAULT NULL,
+  `email_id` varchar(50) DEFAULT NULL,
+  `contact_no1` varchar(50) DEFAULT NULL,
+  `contact_no2` varchar(50) DEFAULT NULL,
+  `fax` varchar(255) DEFAULT NULL,
+  `created_by` varchar(50) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_by` varchar(50) DEFAULT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `active` tinyint(1) DEFAULT '0',
+  `city` varchar(50) DEFAULT NULL,
+  `password` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`facility_center_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tm_satellite_center`
+--
+
+LOCK TABLES `tm_satellite_center` WRITE;
+/*!40000 ALTER TABLE `tm_satellite_center` DISABLE KEYS */;
+INSERT INTO `tm_satellite_center` VALUES ('3002','Appolo1','1-10','Ameepeet','1','1','1','522403','100','200','Anji','Anji@gmail.com','9542610389','95426103891','67575','Ramya','2018-08-08 20:37:17',NULL,'0000-00-00 00:00:00',1,'2','Admin@14'),('4001','Sainath Hospital','1-10','Ameerpet','1','1','1','522601','200','300','Anjireddy','anjireddygopu1995@gmail.com','7989384364','995426103892','4585848574574','Ramya','2018-07-24 15:35:43','Ramya','2018-08-02 21:25:44',1,'1','admin');
+/*!40000 ALTER TABLE `tm_satellite_center` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `towns`
+--
+
+DROP TABLE IF EXISTS `towns`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `towns` (
+  `town_id` int(30) NOT NULL AUTO_INCREMENT,
+  `town_name` varchar(25) DEFAULT NULL,
+  `district_id` int(30) DEFAULT NULL,
+  `state_id` int(30) DEFAULT NULL,
+  `country_id` int(30) DEFAULT NULL,
+  `created_by` varchar(30) DEFAULT NULL,
+  `created_on` varchar(30) DEFAULT NULL,
+  `updated_by` varchar(30) DEFAULT NULL,
+  `updated_on` varchar(30) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`town_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `towns`
+--
+
+LOCK TABLES `towns` WRITE;
+/*!40000 ALTER TABLE `towns` DISABLE KEYS */;
+INSERT INTO `towns` VALUES (1,'Narasaraopet',1,1,1,NULL,NULL,'siva','68201820',1),(2,'Sattena palli',1,1,1,NULL,NULL,'siva','68201820',1),(3,'Kakinada',2,1,1,NULL,NULL,'siva','317201811',0),(4,'Amalapuram',2,1,1,NULL,NULL,NULL,NULL,1),(5,'Huzurabad',4,2,1,'anji','18201816',NULL,NULL,1),(6,'Wyra',4,2,1,'anji','98201812','siva','98201812',0),(7,'Kallur',4,2,1,'anji','108201811','siva','108201811',1),(8,'Adilabad',5,2,1,'anji','138201811','siva','138201811',0);
+/*!40000 ALTER TABLE `towns` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `unit_of_measure`
+--
+
+DROP TABLE IF EXISTS `unit_of_measure`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `unit_of_measure` (
+  `uom_id` int(25) NOT NULL AUTO_INCREMENT,
+  `uom_name` varchar(50) DEFAULT NULL,
+  `uom_description` varchar(100) DEFAULT NULL,
+  `created_by` varchar(25) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` varchar(25) DEFAULT NULL,
+  `updated_on` varchar(25) DEFAULT NULL,
+  `active` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`uom_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `unit_of_measure`
+--
+
+LOCK TABLES `unit_of_measure` WRITE;
+/*!40000 ALTER TABLE `unit_of_measure` DISABLE KEYS */;
+INSERT INTO `unit_of_measure` VALUES (45,'mm','Milli  Meters',NULL,'2018-08-13 15:49:56',NULL,NULL,1),(46,'cm','Centi Meters',NULL,'2018-08-01 23:47:23',NULL,NULL,1),(47,'cm','Centi Meters',NULL,'2018-08-09 17:20:28',NULL,NULL,0),(48,'km/hrs','kilometres per hour',NULL,'2018-08-01 23:50:05',NULL,NULL,1),(49,'npm','node-per-module',NULL,'2018-08-09 17:06:31',NULL,NULL,0),(50,'rpm','rotations-per-minute',NULL,'2018-08-09 17:20:21',NULL,NULL,1),(51,'cm','centimeter',NULL,'2018-08-09 17:37:58',NULL,NULL,0),(52,'m/s','meter per second',NULL,'2018-08-10 16:11:47',NULL,NULL,0),(53,'cm','centimeter',NULL,'2018-08-13 15:59:03',NULL,NULL,1);
+/*!40000 ALTER TABLE `unit_of_measure` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `zip_codes`
+--
+
+DROP TABLE IF EXISTS `zip_codes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `zip_codes` (
+  `zip_code_id` int(30) NOT NULL AUTO_INCREMENT,
+  `zip_code` varchar(25) DEFAULT NULL,
+  `country_id` int(30) DEFAULT NULL,
+  `state_id` int(30) DEFAULT NULL,
+  `district_id` int(30) DEFAULT NULL,
+  `town_id` int(30) DEFAULT NULL,
+  `created_by` varchar(30) DEFAULT NULL,
+  `created_on` varchar(30) DEFAULT NULL,
+  `updated_by` varchar(30) DEFAULT NULL,
+  `updated_on` varchar(30) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`zip_code_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `zip_codes`
+--
+
+LOCK TABLES `zip_codes` WRITE;
+/*!40000 ALTER TABLE `zip_codes` DISABLE KEYS */;
+INSERT INTO `zip_codes` VALUES (1,'123456',1,1,2,3,NULL,NULL,'siva','68201820',1),(2,'522403',1,1,1,2,NULL,NULL,NULL,NULL,1),(3,'533001',1,1,1,3,NULL,NULL,NULL,NULL,1),(4,'533201',1,1,1,4,NULL,NULL,NULL,NULL,1),(5,'515721',1,1,1,1,'anji','108201811','siva','108201811',0),(6,'507165',1,2,4,6,'anji','108201811','siva','108201811',1),(7,'1233',1,2,4,5,'anji','138201811','siva','138201811',1);
+/*!40000 ALTER TABLE `zip_codes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `zipcodes`
+--
+
+DROP TABLE IF EXISTS `zipcodes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `zipcodes` (
+  `zip_code_id` int(30) NOT NULL,
+  `zip_code` varchar(25) DEFAULT NULL,
+  `country_id` int(30) DEFAULT NULL,
+  `state_id` int(30) DEFAULT NULL,
+  `district_id` int(30) DEFAULT NULL,
+  `town_id` int(30) DEFAULT NULL,
+  PRIMARY KEY (`zip_code_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `zipcodes`
+--
+
+LOCK TABLES `zipcodes` WRITE;
+/*!40000 ALTER TABLE `zipcodes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `zipcodes` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-08-17 10:54:06

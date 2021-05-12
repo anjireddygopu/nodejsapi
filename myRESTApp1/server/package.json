@@ -16,7 +16,7 @@
     "morgan": "^1.9.0",
     "mysql": "^2.15.0",
     "nexmo": "^2.3.2",
-    "nodemailer": "^4.6.7",
+    "nodemailer": "^6.4.16",
     "otp-generator": "^1.1.0",
     "ws": "^6.0.0"
   },
